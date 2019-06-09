@@ -1,0 +1,7 @@
+{
+  "name": "ArborShelves",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

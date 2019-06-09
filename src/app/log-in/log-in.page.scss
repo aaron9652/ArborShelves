@@ -1,0 +1,55 @@
+.bg-class{
+    //--background: linear-gradient(270deg,rgb(227, 255, 214) 0%, rgb(214, 255, 206) 13.5%, rgb(214, 255, 212) 33.33%, rgb(210, 226, 255) 100%) !important;
+    --background: rgb(63, 83, 133); 
+}
+.bgh-class{
+    //--background: linear-gradient(270deg,rgb(181, 202, 172) 0%, rgb(178, 209, 172) 13.5%, rgb(166, 199, 164) 33.33%, rgb(157, 169, 190) 100%) !important;
+    --background: rgb(58, 66, 113); 
+    --color: rgb(234, 203, 136);
+    font-family: 'Muli', sans-serif;
+    
+}
+.chkB-class{
+    background-color: black; 
+}
+.buttonC{
+  
+    
+  
+}
+.ti-class{
+    color: linear-gradient(270deg,rgb(227, 255, 214) 0%, rgb(214, 255, 206) 13.5%, rgb(214, 255, 212) 33.33%, rgb(210, 226, 255) 100%) !important;
+    font-family: 'Muli', sans-serif;
+}
+.div-class{
+    position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 99%;
+  height: 99%;
+  text-align: center;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logIn-class{
+
+  float: left; 
+  --background: rgb(63, 83, 133);
+  --color: rgb(234, 203, 136);
+  font-family: 'Muli', sans-serif;
+  
+
+}
+.list-class{
+    border-bottom: 10px;
+    border-color: black;
+    --ion-background-color: transparent; 
+    backface-visibility: hidden;
+    font-family: 'Muli', sans-serif;
+    //padding-bottom: 20%; 
+    font-size: 15px; 
+    --color: white; 
+}

@@ -1,0 +1,50 @@
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Muli:200');
+</style>
+    
+<ion-header>
+  <ion-toolbar class="bgh-class">
+    <ion-button slot="start" href="/home" class="bg-class">
+      Back
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-class" >
+  <div class="div-class">
+    <ion-item class="list-class" > Give Crickets Food <ion-label></ion-label>  <ion-checkbox class="cBox-class" [(ngModel)]="chkBxBool[0].value" ></ion-checkbox>  </ion-item>
+    <ion-label text-wrap class="lab-class" >{{boxes.food}}</ion-label>
+ </div>
+  
+  <div class="div-class">
+    <ion-item class="list-class" text-wrap> Give Crickets Water <ion-label></ion-label> <ion-checkbox class="cBox-class" [(ngModel)]="chkBxBool[1].value" ></ion-checkbox>  </ion-item>
+    <ion-label text-wrap class="lab-class">{{boxes.water}}</ion-label>
+  </div>
+
+  <div class="div-class">
+    <ion-item class="list-class"> Check Box Temperature <ion-label></ion-label> <ion-checkbox class="cBox-class" [(ngModel)]="chkBxBool[2].value" ></ion-checkbox>  </ion-item>
+    <ion-label text-wrap class="lab-class">{{boxes.temp}}</ion-label>
+  </div>
+
+  <div class="div-class">
+    <ion-item class="list-class"> Cycle Egg Container <ion-label></ion-label> <ion-checkbox class="cBox-class" [(ngModel)]="chkBxBool[3].value" ></ion-checkbox>  </ion-item>
+    <ion-label text-wrap class="lab-class"> {{boxes.egg}}</ion-label>
+  </div>
+
+  <div class="inDiv-class">
+    <ion-textarea class="input-class"></ion-textarea>
+  </div>
+  
+<div>
+  <ion-button class="button-class" expand="full"  (click)="buttonCon()">Confirm Box</ion-button>
+</div>
+</ion-content>
+
+<script>
+
+
+
+</script>
+
+
+
