@@ -10,3 +10,11 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 @import '~firebaseui/dist/firebaseui.css';
+
+.bgh-class{
+    //--background: linear-gradient(270deg,rgb(181, 202, 172) 0%, rgb(178, 209, 172) 13.5%, rgb(166, 199, 164) 33.33%, rgb(157, 169, 190) 100%) !important;
+    --background: rgb(58, 66, 113); 
+    --color: rgb(234, 203, 136);
+    font-family: 'Muli', sans-serif;
+    
+}
