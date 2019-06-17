@@ -4,6 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import * as firebase from 'firebase';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { promise } from 'protractor';
 
 const config = {
   apiKey: "AIzaSyCzMO52eo3eI3JwxoTS_gD1hn6y6hoHAfM",
@@ -21,16 +23,39 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private af: AngularFireAuth
   ) {
     this.initializeApp();
   }
-
+  //userId: string; 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      //this.chkAuth();
     });
-    firebase.initializeApp(config);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
+  }
+
+  chkAuth(): boolean {
+    var status; 
+    Promise.all([
+      this.af.authState.subscribe(res => {
+        if (res && res.uid) {
+          console.log('user is logged in');
+          status = true;  
+        } else {
+          console.log('user not logged in');
+          status =  false; 
+        }
+      })]).then(status = status); 
+      return status; 
+  }
+  authStatus(){
+
   }
 }
+

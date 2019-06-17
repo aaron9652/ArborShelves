@@ -26,8 +26,6 @@ export class BoxCLstPage implements OnInit {
   constructor(public barcodeScanner: BarcodeScanner, public navCtrl: NavController, public http: HttpClient, public alertController: AlertController, public actionSheetController: ActionSheetController){
   }
 
-  
-  
   async sendBox(){
     var dateSp = this.date.toString().split('GMT');
 
