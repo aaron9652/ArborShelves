@@ -6,31 +6,34 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { AppComponent } from '../app.component'; 
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  public href = ""; 
      
   constructor(public navCtrl: NavController, public barcodeScanner: BarcodeScanner, public alertController: AlertController, public actionSheetController: ActionSheetController, public network: Network, public appC: AppComponent, public el: ElementRef, @Inject(DOCUMENT) document){
     
   }
-   disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+  disconnectSubscription = this.network.onDisconnect().subscribe(() => {
     alert("check network"); 
   });
 
-
-
   ngOnInit() {
     if (this.appC.chkAuth() == true) {
-      document.getElementById('lInButton').hidden = true;
+      document.getElementById('lInButton').hidden = false;
+      document.getElementById('lOutButton').hidden = true;
+      this.href = "/box";
     } 
     else{ 
+      this.href = "/log-in";
       document.getElementById('lInButton').hidden = true;
       document.getElementById('lOutButton').hidden = false; 
+      document.getElementById('chkLstButton').onclick = function() { alert("Please Log In First"); } 
     }
-    //document.getElementById('lInButton').innerHTML = "asdf"; 
   }
   
 

@@ -13,15 +13,18 @@
     
     <div class="div-class">
      
-        <ion-button href="/box" class="bgh-class" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button>
-        <ion-button href="/box" class="bgh-class" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button>
+        <!-- <ion-button href="/box" class="bgh-class" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button> -->
+        <ion-button href="{{ href }}"  class="bgh-class" id="chkLstButton" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button>
         <!-- <ion-button class="bgh-class" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button> -->
     </div>
     <!-- <firebase-ui></firebase-ui> -->
 </ion-content>
 
 <script>
-    
+    function boxClick() {
+        //document.getElementById("chkLstButton").href = "/box"; 
+        alert("test"); 
+    }
 </script>
 
 
