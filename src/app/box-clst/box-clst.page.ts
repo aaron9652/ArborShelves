@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ActionSheetController  } from '@ionic/angular'; 
-import { HttpClient, HttpParams } from '@angular/common/http'; 
+import { NavController, ActionSheetController } from '@ionic/angular';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-
+import { AppComponent } from '../app.component';
 import { AlertController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -12,46 +13,47 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./box-clst.page.scss'],
 })
 export class BoxCLstPage implements OnInit {
-  
-  dbUrl = ''; 
-  public boxes: Object; 
+
+  dbUrl = '';
+  public boxes: Object;
   public date = new Date();
-  
-  public chkBxBool: Array< {value: boolean} > = 
-  [  { value: false}, { value: false}, { value: false}, { value: false}  ]; 
-  public dbLabel: Array< {value: string} > =
-  [ { value: ''}, { value: ''}, { value: ''}, { value: ''} ]
+  public userID;
+
+  public chkBxBool: Array<{ value: boolean }> =
+    [{ value: false }, { value: false }, { value: false }, { value: false }];
+  public dbLabel: Array<{ value: string }> =
+    [{ value: '' }, { value: '' }, { value: '' }, { value: '' }]
 
 
-  constructor(public barcodeScanner: BarcodeScanner, public navCtrl: NavController, public http: HttpClient, public alertController: AlertController, public actionSheetController: ActionSheetController){
+  constructor(public barcodeScanner: BarcodeScanner, public navCtrl: NavController, public http: HttpClient, public alertController: AlertController, public actionSheetController: ActionSheetController, public appC: AppComponent, public af: AngularFireAuth) {
   }
 
-  async sendBox(){
+  async sendBox() {
     var dateSp = this.date.toString().split('GMT');
 
-    if (this.chkBxBool[0].value == true){ 
+    if (this.chkBxBool[0].value == true) {
       await this.http.patch(this.dbUrl, {
-      food: 'Last Completed by Aaron Ediger ' + dateSp[0]
-      }).subscribe((data)=>{});
+        food: 'Last Completed by ' + this.userID + " " + dateSp[0]
+      }).subscribe((data) => { });
     }
-    if (this.chkBxBool[1].value == true){ 
+    if (this.chkBxBool[1].value == true) {
       await this.http.patch(this.dbUrl, {
-      water: 'Last Completed by Aaron Ediger ' + dateSp[0]
-      }).subscribe((data)=>{});
-    } 
-    if (this.chkBxBool[2].value == true){ 
+        water: 'Last Completed by ' + this.userID + " " +dateSp[0]
+      }).subscribe((data) => { });
+    }
+    if (this.chkBxBool[2].value == true) {
       await this.http.patch(this.dbUrl, {
-      temp: 'Last Completed by Aaron Ediger ' + dateSp[0]
-      }).subscribe((data)=>{});
-    } 
-    if (this.chkBxBool[3].value == true){ 
+        temp: 'Last Completed by ' + this.userID + " " + dateSp[0]
+      }).subscribe((data) => { });
+    }
+    if (this.chkBxBool[3].value == true) {
       await this.http.patch(this.dbUrl, {
-      egg: 'Last Completed by Aaron Ediger ' + dateSp[0]
-      }).subscribe((data)=>{});
-    }         
-  } 
-  
-  getBox(url){     
+        egg: 'Last Completed by ' + this.userID + " " +dateSp[0]
+      }).subscribe((data) => { });
+    }
+  }
+
+  getBox(url) {
     return this.http.get(url);
   }
 
@@ -61,17 +63,17 @@ export class BoxCLstPage implements OnInit {
       buttons: [{
         text: 'Submit',
         icon: 'checkmark-circle-outline',
-  
+
         handler: () => {
           let navTransition = actionSheet.dismiss();
 
           console.log('Submit clicked');
           this.sendBox().then(() => {
-            navTransition.then(() =>{
+            navTransition.then(() => {
               this.navCtrl.navigateForward('/home')
             });
-          });   
-          return false; 
+          });
+          return false;
         }
       }, {
         text: 'Cancel',
@@ -85,15 +87,21 @@ export class BoxCLstPage implements OnInit {
     await actionSheet.present();
   }
 
-  
+  getUserID() {
+    return this.appC.getUserID();
+  }
+
   ngOnInit() {
+    this.af.authState.subscribe(user => {
+      this.userID = user.displayName;
+    });
     this.barcodeScanner.scan().then(barcodeData => {
-      this.dbUrl = barcodeData.text; 
-      this.getBox(barcodeData.text).subscribe(data => { this.boxes = data; });   
-      }).catch(err => {
-          alert(err); 
-          console.log('Error', err); 
-      });
+      this.dbUrl = barcodeData.text;
+      this.getBox(barcodeData.text).subscribe(data => { this.boxes = data; });
+    }).catch(err => {
+      alert(err);
+      console.log('Error', err);
+    });
   }
 
 }

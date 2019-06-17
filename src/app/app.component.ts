@@ -20,6 +20,7 @@ const config = {
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  public userID; 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -30,6 +31,7 @@ export class AppComponent {
   }
   //userId: string; 
   initializeApp() {
+    this.getUserID(); 
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -41,21 +43,28 @@ export class AppComponent {
   }
 
   chkAuth(): boolean {
-    var status; 
+    var status;
     Promise.all([
       this.af.authState.subscribe(res => {
         if (res && res.uid) {
           console.log('user is logged in');
-          status = true;  
+          status = true;
         } else {
           console.log('user not logged in');
-          status =  false; 
+          status = false;
         }
-      })]).then(status = status); 
-      return status; 
+      })]).then(status = status);
+    return status;
   }
-  authStatus(){
-
+  
+  getUserID(){
+    this.af.authState.subscribe(user => {
+      this.userID = user.uid; 
+      //you have to write the logic here.
+    }) 
+  }
+  sendUserID(): string{
+    return this.userID; 
   }
 }
 
