@@ -8,7 +8,7 @@ import { AppComponent } from '../app.component';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FirebaseAuth } from '@angular/fire';
 import { Observable } from 'rxjs';
-import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-home',
@@ -73,7 +73,7 @@ export class HomePage implements OnInit {
   logOut(){
     this.af.auth.signOut();
     console.log("signed out");
-    //this.navCtrl.navigateForward("/home");  
+    this.navCtrl.navigateForward("/log-in");  
 
 
   }

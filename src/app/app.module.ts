@@ -26,19 +26,7 @@ import { environment } from '../environments/environment';
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
   signInOptions: [
-    {
-      scopes: [
-        'public_profile',
-        'email',
-        'user_likes',
-        'user_friends'
-      ],
-      customParameters: {
-        'auth_type': 'reauthenticate'
-      },
-      provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID, 
-    },
-    
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ],
   tosUrl: '<your-tos-link>',
   privacyPolicyUrl: '<your-privacyPolicyUrl-link>',
