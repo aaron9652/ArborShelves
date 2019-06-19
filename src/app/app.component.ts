@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -19,7 +19,11 @@ const config = {
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  async ngOnInit() {
+
+  }
+  public userStatus; 
   public userID; 
   constructor(
     private platform: Platform,
@@ -42,20 +46,20 @@ export class AppComponent {
     }
   }
 
-  chkAuth(): boolean {
-    var status;
-    Promise.all([
-      this.af.authState.subscribe(res => {
-        if (res && res.uid) {
-          console.log('user is logged in');
-          status = true;
-        } else {
-          console.log('user not logged in');
-          status = false;
-        }
-      })]).then(status = status);
-    return status;
-  }
+  // async chkAuth() {
+  //   await this.af.authState()
+  //   // Promise.all([
+  //   //   this.af.authState.subscribe(res => {
+  //   //     if (res && res.uid) {
+  //   //       console.log('user is logged in');
+  //   //       this.userStatus = true;
+  //   //     } else {
+  //   //       console.log('user not logged in');
+  //   //       this.userStatus = false;
+  //   //     }
+  //   //   })]).then(); 
+
+  // }
   
   getUserID(){
     this.af.authState.subscribe(user => {

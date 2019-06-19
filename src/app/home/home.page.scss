@@ -1,10 +1,11 @@
 .bg-class{
     //--background: linear-gradient(270deg,rgb(227, 255, 214) 0%, rgb(214, 255, 206) 13.5%, rgb(214, 255, 212) 33.33%, rgb(210, 226, 255) 100%) !important;
     --background: rgb(63, 83, 133); 
+
 }
 .bgh-class{
     //--background: linear-gradient(270deg,rgb(181, 202, 172) 0%, rgb(178, 209, 172) 13.5%, rgb(166, 199, 164) 33.33%, rgb(157, 169, 190) 100%) !important;
-    --background: rgb(58, 66, 113); 
+    background-color: rgb(58, 66, 113); 
     --color: rgb(234, 203, 136);
     font-family: 'Muli', sans-serif;
     
@@ -12,10 +13,31 @@
 .chkB-class{
     background-color: black; 
 }
-.buttonC{
-  
-    
-  
+.mainScButtons{
+    --background: rgb(58, 66, 113);
+    --color: rgb(234, 203, 136);
+    font-family: 'Muli', sans-serif; 
+}
+
+.header-class{
+    height: 10vh;
+}
+.toolbar-class{
+    --padding-top: 0px !important;
+    --padding-start: 0px !important;
+    --padding-bottom: 0px !important;
+    --padding-end: 0px !important;
+}
+.content-class{
+
+}
+.grid-container{
+    display: grid;
+    //grid-area: 100%; 
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    width: 100vw;
+    height: 90vh;
 }
 .ti-class{
     color: linear-gradient(270deg,rgb(227, 255, 214) 0%, rgb(214, 255, 206) 13.5%, rgb(214, 255, 212) 33.33%, rgb(210, 226, 255) 100%) !important;
@@ -35,8 +57,9 @@
   justify-content: center;
 }
 .logIn-class{
-
-  float: left; 
+    
+  align-self: flex-start;  
+  float: inline-start;
   --background: rgb(63, 83, 133);
   --color: rgb(234, 203, 136);
   font-family: 'Muli', sans-serif;
