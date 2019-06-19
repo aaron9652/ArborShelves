@@ -8,6 +8,7 @@ import { AppComponent } from '../app.component';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FirebaseAuth } from '@angular/fire';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomePage implements OnInit {
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
   public loggedIn = false;
+  functions: any;
   
   //https://stackoverflow.com/questions/53670047/angular-firebase-auth-how-to-check-if-user-is-logged-in-to-hide-login-link-from
 
@@ -32,8 +34,6 @@ export class HomePage implements OnInit {
             this.userDetails = user;
             this.loggedIn = true; 
             this.chkAuth(); 
-
-            console.log(this.userDetails);
           } else {
             this.userDetails = null;
             this.chkAuth(); 
@@ -44,6 +44,7 @@ export class HomePage implements OnInit {
   disconnectSubscription = this.network.onDisconnect().subscribe(() => {
     alert("check network");
   });
+  
 
   ngOnInit() {
 
@@ -59,7 +60,7 @@ export class HomePage implements OnInit {
       // this.af.authState.subscribe(user => {
       //   document.getElementById('lOutButton').innerHTML = user.displayName;
       // })
-      document.getElementById('lOutButton').innerHTML = this.userDetails.displayName; 
+      document.getElementById('userName').innerHTML = this.userDetails.displayName; 
     }
     else {
       this.href = "/log-in";
@@ -69,38 +70,14 @@ export class HomePage implements OnInit {
     }
   }
 
+  logOut(){
+    this.af.auth.signOut();
+    console.log("signed out");
+    //this.navCtrl.navigateForward("/home");  
 
 
+  }
 
-  // async buttonCon(){
-  //   const actionSheet = await this.actionSheetController.create({
-  //     header: 'Create New Box?',
-  //     buttons: [{
-  //       text: 'Submit',
-  //       icon: 'checkmark-circle-outline',
-
-  //       handler: () => {
-  //         let navTransition = actionSheet.dismiss();
-
-  //         console.log('Submit clicked');
-  //         this.sendBox().then(() => {
-  //           navTransition.then(() =>{
-  //             this.navCtrl.navigateForward('/home')
-  //           });
-  //         });   
-  //         return false; 
-  //       }
-  //     }, {
-  //       text: 'Cancel',
-  //       icon: 'close',
-  //       role: 'cancel',
-  //       handler: () => {
-  //         console.log('Cancel clicked');
-  //       }
-  //     }]
-  //   });
-  //   await actionSheet.present();
-  // }
 
 }
 

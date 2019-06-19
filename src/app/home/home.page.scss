@@ -1,18 +1,14 @@
 .bg-class{
-    //--background: linear-gradient(270deg,rgb(227, 255, 214) 0%, rgb(214, 255, 206) 13.5%, rgb(214, 255, 212) 33.33%, rgb(210, 226, 255) 100%) !important;
     --background: rgb(63, 83, 133); 
-
 }
+
 .bgh-class{
-    //--background: linear-gradient(270deg,rgb(181, 202, 172) 0%, rgb(178, 209, 172) 13.5%, rgb(166, 199, 164) 33.33%, rgb(157, 169, 190) 100%) !important;
     background-color: rgb(58, 66, 113); 
     --color: rgb(234, 203, 136);
     font-family: 'Muli', sans-serif;
     
 }
-.chkB-class{
-    background-color: black; 
-}
+
 .mainScButtons{
     --background: rgb(58, 66, 113);
     --color: rgb(234, 203, 136);
@@ -22,57 +18,63 @@
 .header-class{
     height: 10vh;
 }
+
 .toolbar-class{
     --padding-top: 0px !important;
     --padding-start: 0px !important;
     --padding-bottom: 0px !important;
     --padding-end: 0px !important;
 }
-.content-class{
 
-}
 .grid-container{
-    display: grid;
-    //grid-area: 100%; 
+    display: grid; 
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(5, 1fr);
     width: 100vw;
     height: 90vh;
 }
+
 .ti-class{
     color: linear-gradient(270deg,rgb(227, 255, 214) 0%, rgb(214, 255, 206) 13.5%, rgb(214, 255, 212) 33.33%, rgb(210, 226, 255) 100%) !important;
     font-family: 'Muli', sans-serif;
 }
+
 .div-class{
     position: absolute;
-  top: 0%;
-  left: 0%;
-  width: 99%;
-  height: 99%;
-  text-align: center;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    top: 0%;
+    left: 0%;
+    width: 99%;
+    height: 99%;
+    text-align: center;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.logIn-class{
-    
-  align-self: flex-start;  
-  float: inline-start;
-  --background: rgb(63, 83, 133);
-  --color: rgb(234, 203, 136);
-  font-family: 'Muli', sans-serif;
-  
+.userName{
+    color: rgb(234, 203, 136);
+    float: right; 
+    padding-right: 2%;
+    padding-top: 2%;    
+}
+.headDiv{
+    padding-top: 5%; 
+}
+.logIn-class{   
+    --background: rgb(63, 83, 133);
+    --color: rgb(234, 203, 136);  
+    float: left; 
+    padding-left: 2%;
+    font-family: 'Muli', sans-serif;
+}
 
-}
 .list-class{
     border-bottom: 10px;
     border-color: black;
     --ion-background-color: transparent; 
     backface-visibility: hidden;
-    font-family: 'Muli', sans-serif;
-    //padding-bottom: 20%; 
+    font-family: 'Muli', sans-serif; 
     font-size: 15px; 
     --color: white; 
 }

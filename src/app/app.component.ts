@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   }
   //userId: string; 
   initializeApp() {
-    this.getUserID(); 
+    
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -46,29 +46,5 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // async chkAuth() {
-  //   await this.af.authState()
-  //   // Promise.all([
-  //   //   this.af.authState.subscribe(res => {
-  //   //     if (res && res.uid) {
-  //   //       console.log('user is logged in');
-  //   //       this.userStatus = true;
-  //   //     } else {
-  //   //       console.log('user not logged in');
-  //   //       this.userStatus = false;
-  //   //     }
-  //   //   })]).then(); 
-
-  // }
-  
-  getUserID(){
-    this.af.authState.subscribe(user => {
-      this.userID = user.uid; 
-      //you have to write the logic here.
-    }) 
-  }
-  sendUserID(): string{
-    return this.userID; 
-  }
 }
 

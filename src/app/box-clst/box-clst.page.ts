@@ -87,9 +87,7 @@ export class BoxCLstPage implements OnInit {
     await actionSheet.present();
   }
 
-  getUserID() {
-    return this.appC.getUserID();
-  }
+  
 
   ngOnInit() {
     this.af.authState.subscribe(user => {

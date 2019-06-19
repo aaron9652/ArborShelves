@@ -2,31 +2,33 @@
         @import url('https://fonts.googleapis.com/css?family=Muli:200');
 </style>
 
-<ion-header class="bgh-class" style="height: 10vh" >
-  <ion-button padding class="logIn-class" id="lInButton" size="small" href="/log-in"> log in</ion-button>
-  <ion-button padding hidden class="logIn-class" id="lOutButton" size="small" href="/log-in"> log out</ion-button>
+<ion-header class="bgh-class" style="height: 10vh" > 
+  <div class="headDiv">
+  <ion-button class="logIn-class" id="lInButton" size="small" href="/log-in"> log in</ion-button>
+  <ion-button  hidden class="logIn-class" id="lOutButton" size="small" (click)="logOut()" href="/home" > log out</ion-button> </div>
+  <ion-label id="userName" class="userName"></ion-label>
   </ion-header>
 
 <ion-content class="content-class bg-class">
   <div class="grid-container">
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>4</div>
-    <div>5</div>
-    <div>6</div>
-    <div>7</div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
     <div>
       <ion-button href="{{ href }}"  class="mainScButtons" id="chkLstButton" expand="block" size="large" fill ="outline" shape="round">Box History</ion-button>
       <ion-button href="{{ href }}"  class="mainScButtons" id="chkLstButton" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button>
     </div>
-    <div>9</div>
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>4</div>
-    <div>5</div>
-    <div>6</div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
   </div>
 </ion-content>
 
