@@ -16,7 +16,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  public href = "";
+  public qrHref = "";
+  public hsHref = "";
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
   public loggedIn = false;
@@ -44,29 +45,24 @@ export class HomePage implements OnInit {
   disconnectSubscription = this.network.onDisconnect().subscribe(() => {
     alert("check network");
   });
-  
-
   ngOnInit() {
-
-    //await this.chkAuth();
-    
   }
   
    chkAuth() {
     if (this.loggedIn == true) {
+      this.qrHref = "/box";
+      this.hsHref = "/history";
       document.getElementById('lInButton').hidden = true;
       document.getElementById('lOutButton').hidden = false;
-      this.href = "/box";
-      // this.af.authState.subscribe(user => {
-      //   document.getElementById('lOutButton').innerHTML = user.displayName;
-      // })
       document.getElementById('userName').innerHTML = this.userDetails.displayName; 
     }
     else {
-      this.href = "/log-in";
+      this.qrHref = "/log-in";
+      this.hsHref = "/log-in";
       document.getElementById('lInButton').hidden = false;
       document.getElementById('lOutButton').hidden = true;
       document.getElementById('chkLstButton').onclick = function () { alert("Please Log In First"); }
+      document.getElementById('hsButton').onclick = function () { alert("Please Log In First"); }
     }
   }
 
@@ -74,8 +70,6 @@ export class HomePage implements OnInit {
     this.af.auth.signOut();
     console.log("signed out");
     this.navCtrl.navigateForward("/log-in");  
-
-
   }
 
 

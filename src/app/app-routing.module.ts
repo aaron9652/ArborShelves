@@ -6,7 +6,8 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'box', loadChildren: './box-clst/box-clst.module#BoxCLstPageModule' },
   { path: 'box-scan', loadChildren: './box-scan/box-scan.module#BoxScanPageModule' },
-  { path: 'log-in', loadChildren: './log-in/log-in.module#LogInPageModule' },
+  { path: 'log-in', loadChildren: './log-in/log-in.module#LogInPageModule' },  { path: 'history', loadChildren: './history/history.module#HistoryPageModule' },
+
 ];
 
 @NgModule({
