@@ -5,6 +5,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { AppComponent } from '../app.component';
 import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -17,7 +18,9 @@ export class BoxCLstPage implements OnInit {
   dbUrl = '';
   public boxes: Object;
   public date = new Date();
-  public userID;
+
+  private user: Observable<firebase.User>;
+  private userDetails: firebase.User = null;
 
   public chkBxBool: Array<{ value: boolean }> =
     [{ value: false }, { value: false }, { value: false }, { value: false }];
@@ -26,6 +29,11 @@ export class BoxCLstPage implements OnInit {
 
 
   constructor(public barcodeScanner: BarcodeScanner, public navCtrl: NavController, public http: HttpClient, public alertController: AlertController, public actionSheetController: ActionSheetController, public appC: AppComponent, public af: AngularFireAuth) {
+  this.user = af.authState;
+  this.user.subscribe((user) =>{
+    this.userDetails = user; 
+  });
+  
   }
 
   async sendBox() {
@@ -33,22 +41,22 @@ export class BoxCLstPage implements OnInit {
 
     if (this.chkBxBool[0].value == true) {
       await this.http.patch(this.dbUrl, {
-        food: 'Last Completed by ' + this.userID + " " + dateSp[0]
+        food: 'Last Completed by ' + this.userDetails.displayName.toString() + " " + dateSp[0]
       }).subscribe((data) => { });
     }
     if (this.chkBxBool[1].value == true) {
       await this.http.patch(this.dbUrl, {
-        water: 'Last Completed by ' + this.userID + " " +dateSp[0]
+        water: 'Last Completed by ' + this.userDetails.displayName.toString() + " " +dateSp[0]
       }).subscribe((data) => { });
     }
     if (this.chkBxBool[2].value == true) {
       await this.http.patch(this.dbUrl, {
-        temp: 'Last Completed by ' + this.userID + " " + dateSp[0]
+        temp: 'Last Completed by ' + this.userDetails.displayName.toString() + " " + dateSp[0]
       }).subscribe((data) => { });
     }
     if (this.chkBxBool[3].value == true) {
       await this.http.patch(this.dbUrl, {
-        egg: 'Last Completed by ' + this.userID + " " +dateSp[0]
+        egg: 'Last Completed by ' + this.userDetails.displayName.toString() + " " +dateSp[0]
       }).subscribe((data) => { });
     }
   }
@@ -90,16 +98,23 @@ export class BoxCLstPage implements OnInit {
   
 
   ngOnInit() {
-    this.af.authState.subscribe(user => {
-      this.userID = user.displayName;
-    });
+    try{
     this.barcodeScanner.scan().then(barcodeData => {
+      if(barcodeData.text != null && barcodeData.text != ""){
       this.dbUrl = barcodeData.text;
       this.getBox(barcodeData.text).subscribe(data => { this.boxes = data; });
+      }
+      else{
+        this.navCtrl.navigateForward("/home"); 
+      }
     }).catch(err => {
       alert(err);
       console.log('Error', err);
     });
+  }
+  catch{
+    this.navCtrl.navigateForward("/home");
+  }
   }
 
 }

@@ -14,11 +14,13 @@ export class BoxScanPage implements OnInit {
   ngOnInit() {
     
     this.barcodeScanner.scan().then(barcodeData => {
-     this.dbUrl = barcodeData.text; 
+      (barcodeData.text == null || barcodeData.text == "") ? this.dbUrl = barcodeData.text : this.navCtrl.navigateForward('/box');
+
      }).catch(err => {
          console.log('Error', err);
+         this.navCtrl.navigateForward('/home');
      });
-     this.navCtrl.navigateForward('/box');
+     
      
   }
 
