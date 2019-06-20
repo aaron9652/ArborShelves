@@ -1,23 +1,17 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar class="bgh-class">
     <ion-title>history</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
-    
-  <ion-list-header onclick="test.hidden = false; test1.hidden = false; ">
-    <ion-item>asdf</ion-item>
-  </ion-list-header>
+<ion-content class="bg-class" >
 
 
-</ion-list>
-
-  <ion-list>
-    <ion-list *ngFor = "let la of test;">
-      <ion-item-sliding id="item100">
-          <ion-item>
+  <ion-list class="bg-class" >
+    <div  class="bg-class"  *ngFor = "let la of test; let i = index">
+    <ion-list  id="{{testID}}" class="bg-class" >
+      <ion-item-sliding [attr.id]="'box' + i" >
+          <ion-item class="bg-class" >
             
             <ion-label>
               <h1>Box #</h1>            
@@ -26,23 +20,26 @@
               <p>Last completed</p> 10:45 AM
             </ion-note>
           </ion-item>      
-          <ion-item-options side="end" >
+          <ion-item-options side="end" (click)="boxTest('history' + i);">
             <ion-item-option color="danger" >
-              <ion-icon slot="icon-only" name="book" onclick="if(test.hidden == true) test.hidden = false; else test.hidden = true; " ></ion-icon>
+              <ion-icon slot="icon-only" name="book"  ></ion-icon>
             </ion-item-option>          
           </ion-item-options>
         </ion-item-sliding>
-        <ion-list id="test" hidden>
-            <ion-item  >asdf</ion-item>
+        <ion-list [attr.id]="'history' + i" hidden class="his-class">
+            <ion-item class="his-class" >asdf</ion-item>
+            <ion-item class="his-class" >asdf</ion-item>
+            <ion-item class="his-class" >asdf</ion-item>
+            <ion-item class="his-class" >asdf</ion-item>
           </ion-list>
       </ion-list>
-      
+    </div>
       
     </ion-list>
     
 
 
-    <ion-infinite-scroll  (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll  >
         <ion-infinite-scroll-content
           loadingSpinner="bubbles"
           loadingText="Loading more data...">
@@ -55,3 +52,4 @@
     
   </ion-list>
 </ion-content>
+

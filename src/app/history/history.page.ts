@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
-import { IonInfiniteScroll } from '@ionic/angular'
+import { IonInfiniteScroll } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-history',
@@ -9,6 +10,7 @@ import { IonInfiniteScroll } from '@ionic/angular'
 export class HistoryPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   test:any[]=[]; 
+  public testID; 
   constructor() { 
     this.test = [
       "label",
@@ -46,5 +48,16 @@ export class HistoryPage implements OnInit {
 
   ngOnInit() {
   }
-
+  forTest(){
+    for(var k = 0; k < this.test.length; k++){
+      this.testID = "box" + k; 
+    }
+  }
+  box(event: any){
+    let elementId: string = (event.target as Element).id;
+    console.log(elementId);
+  }
+  boxTest(name: any){
+    (document.getElementById(name).hidden == true) ? document.getElementById(name).hidden = false : document.getElementById(name).hidden = true; 
+  }
 }
