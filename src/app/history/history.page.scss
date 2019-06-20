@@ -19,3 +19,49 @@
     color: rgb(234, 203, 136);
 
 }
+@-webkit-keyframes slideInBothWays {
+    
+  0% {
+    -webkit-transform: translate3d(-100%,0,0);
+  }
+
+
+
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+.slide-in-reverse {
+   -webkit-animation: slideInReverse ease-in 1; 
+  animation: slideInReverse ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+   
+}
+.slide-in-both-ways {
+    
+    -webkit-animation: slideInBothWays ease-in 1; 
+   animation: slideInBothWays ease-in 1;
+   -webkit-animation-fill-mode: forwards;
+   animation-fill-mode: forwards;
+   -webkit-animation-duration: .5s;
+   animation-duration: .5s;
+   
+   
+ }
+@-webkit-keyframes slideInReverse {
+    
+    0% {
+      -webkit-transform: translate3d(0,0,0);
+    }
+  
+  
+  
+    100% {
+      -webkit-transform: translate3d(-100%,0,0);
+      display: block;
+    }
+  }

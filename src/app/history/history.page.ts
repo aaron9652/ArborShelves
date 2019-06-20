@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { Script } from 'vm';
+import { delay } from 'q';
 
 
 @Component({
@@ -13,30 +15,6 @@ export class HistoryPage implements OnInit {
   public testID; 
   constructor() { 
     this.test = [
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
       "label",
       "label",
       "label",
@@ -57,7 +35,27 @@ export class HistoryPage implements OnInit {
     let elementId: string = (event.target as Element).id;
     console.log(elementId);
   }
-  boxTest(name: any){
-    (document.getElementById(name).hidden == true) ? document.getElementById(name).hidden = false : document.getElementById(name).hidden = true; 
+  async boxTest(name: any){
+    
+    
+    
+    if (document.getElementById(name).hidden == true){ 
+      document.getElementById(name).toggleAttribute("hidden");
+      
+    } 
+    else{
+      document.getElementById(name).classList.toggle("slide-in-both-ways");
+      document.getElementById(name).classList.toggle("slide-in-reverse"); 
+      
+      //document.getElementById(name).classList.replace("slide-in-both-ways","slide-in-reverse");
+      //document.getElementById(name).hidden = true; 
+    }
+
   }
+  toggle(){
+  document.getElementById("item").classList.toggle  
+  }
+  
 }
+
+

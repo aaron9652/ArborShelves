@@ -1,11 +1,16 @@
+
 <ion-header >
   <ion-toolbar class="bgh-class">
     <ion-title>history</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="bg-class" >
-
+<ion-content class="bg-class " >
+<script type="text/javascript">
+  function a(){
+    console.log("asdf");
+  }
+</script>
 
   <ion-list class="bg-class" >
     <div  class="bg-class"  *ngFor = "let la of test; let i = index">
@@ -26,12 +31,13 @@
             </ion-item-option>          
           </ion-item-options>
         </ion-item-sliding>
-        <ion-list [attr.id]="'history' + i" hidden class="his-class">
-            <ion-item class="his-class" >asdf</ion-item>
-            <ion-item class="his-class" >asdf</ion-item>
-            <ion-item class="his-class" >asdf</ion-item>
-            <ion-item class="his-class" >asdf</ion-item>
-          </ion-list>
+        <div>
+        <ion-list [attr.id]="'history' + i" hidden class="his-class slide-in-both-ways">
+            <ion-item class="his-class " onclick="a()" >asdf</ion-item>
+            <ion-item class="his-class " >asdf</ion-item>
+            <ion-item class="his-class " >asdf</ion-item>
+            <ion-item class="his-class " >asdf</ion-item>
+          </ion-list></div>
       </ion-list>
     </div>
       
@@ -39,7 +45,7 @@
     
 
 
-    <ion-infinite-scroll  >
+    <!-- <ion-infinite-scroll  >
         <ion-infinite-scroll-content
           loadingSpinner="bubbles"
           loadingText="Loading more data...">
@@ -50,6 +56,12 @@
       </ion-infinite-scroll>
   <ion-list>
     
-  </ion-list>
-</ion-content>
+  </ion-list> -->
 
+</ion-content>
+<script >
+  function a(){
+    console.log("asdf");
+  }
+</script>
+  
