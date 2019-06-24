@@ -3,7 +3,7 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { Script } from 'vm';
 import { delay } from 'q';
 import { del } from 'selenium-webdriver/http';
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-history',
@@ -11,10 +11,13 @@ import { del } from 'selenium-webdriver/http';
   styleUrls: ['./history.page.scss'],
 })
 export class HistoryPage implements OnInit {
+  public dbUrl = "https://arborshelvestest.firebaseio.com/Boxes/Box0.json"; 
+  public boxes: Object = this.getBox(this.dbUrl).subscribe(); 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   test:any[]=[]; 
+  listTest:any[]=[]; 
   public testID; 
-  constructor() { 
+  constructor(public http: HttpClient) { 
     this.test = [
       "label",
       "label",
@@ -22,30 +25,30 @@ export class HistoryPage implements OnInit {
       "label",
       "label",
       "label"
-    ]
+    ];
+    this.listTest = [
+      "label",
+      "label",
+      "label",
+      "label",
+      "label",
+      "label"
+    ];
   }
 
   ngOnInit() {
   }
-  forTest(){
-    for(var k = 0; k < this.test.length; k++){
-      this.testID = "box" + k; 
-    }
-  }
-  box(event: any){
-    let elementId: string = (event.target as Element).id;
-    console.log(elementId);
-  }
-  async boxTest(name: any, button: any){
-    
 
-    
+  getBox(url) {
+    return this.http.get(url);
+  }
+
+  
+  async boxTest(name: any){
+
     if (document.getElementById(name).style.display == 'none'){ 
       document.getElementById(name).classList.replace("slide-in-reverse","slide-in-both-ways")
       document.getElementById(name).style.display = 'block';
-      
-      
-      
     } 
     else{
       var myBox = document.getElementById(name);

@@ -1,16 +1,16 @@
-
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Muli:200');
+</style>
 <ion-header >
   <ion-toolbar class="bgh-class">
-    <ion-title >history</ion-title>
+      <ion-button slot="start" href="/home" class="bg-class">
+        Back
+      </ion-button>
+    <ion-title style="float: right" >Box Archive</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="bg-class " >
-<script type="text/javascript">
-  function a(){
-    console.log("asdf");
-  }
-</script>
 
   <ion-list class="bg-class" >
     <div  class="bg-class"  *ngFor = "let la of test; let i = index">
@@ -18,26 +18,27 @@
       <ion-item-sliding [attr.id]="'box' + i" >
           <ion-item class="bg-class" >
             
-            <ion-label>
-              <h1>Box #</h1>            
+            <ion-label style="font-family:'Muli', sans-serif;">
+              <h1>Box {{boxes.egg.one}}</h1>            
             </ion-label>
             <ion-note slot="end">
               <p>Last completed</p> 10:45 AM
             </ion-note>
           </ion-item>      
-          <ion-item-options id="'showHis' + i" side="end" (click)="boxTest('history' + i, 'showHis' + i);">
-            <ion-item-option color="danger" >
+          <ion-item-options id="'showHis' + i" side="end" (click)="boxTest('history' + i)">
+            <ion-item-option class="slideButton-class" >
               <ion-icon slot="icon-only" name="book"  ></ion-icon>
             </ion-item-option>          
           </ion-item-options>
         </ion-item-sliding>
-        <div>
-        <ion-list [attr.id]="'history' + i" style="display: none" class="his-class slide-in-reverse">
-            <ion-item class="his-class " onclick="a()" >asdf</ion-item>
-            <ion-item class="his-class " >asdf</ion-item>
-            <ion-item class="his-class " >asdf</ion-item>
-            <ion-item class="his-class " >asdf</ion-item>
-          </ion-list></div>
+        <ion-list padding [attr.id]="'history' + i" style="display: none" class="his-class slide-in-reverse">
+            <div *ngFor = "let t of test; let k = index" class="bg-class" >
+              <ion-item  class="innerList-class"(click)="boxTest('his'+i+k)">Date{{k}}</ion-item>
+              <ion-list no-padding class="ininnerList-class slide-in-reverse" [attr.id]="'his'+i+k" style="display: none;" >
+                  <ion-item class="ininnerList-class " *ngFor = "let t of test">asdf</ion-item>
+              </ion-list>
+            </div>
+          </ion-list>
       </ion-list>
     </div>
       

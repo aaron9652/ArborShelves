@@ -10,6 +10,7 @@
     background-color: rgb(63, 83, 133);
     --color: rgb(234, 203, 136);
     color: rgb(234, 203, 136);
+    font-family: 'Muli', sans-serif;
 }
 
 .his-class{
@@ -17,15 +18,33 @@
     background-color: rgb(63, 83, 133);
     --color: rgb(234, 203, 136);
     color: rgb(234, 203, 136);
+    font-family: 'Muli', sans-serif;
  
 }
-.his-class-dis{
+
+.innerList-class{
   --background: rgb(93, 119, 185); 
-    background-color: rgb(63, 83, 133);
-    --color: rgb(234, 203, 136);
+  background-color: rgb(93, 119, 185); 
+  --color: rgb(234, 203, 136);
     color: rgb(234, 203, 136);
-  display: block; 
+    --border-color:  rgb(63, 83, 133);
+    font-family: 'Muli', sans-serif; 
 }
+.ininnerList-class{
+  --background: rgb(132, 163, 241); 
+  background-color: rgb(132, 163, 241); 
+  --color: rgb(234, 203, 136);
+    color: rgb(234, 203, 136); 
+    font-family: 'Muli', sans-serif;
+}
+
+.slideButton-class{
+  --background: rgb(234, 203, 136);
+  background-color: rgb(234, 203, 136); 
+  --color: rgb(63, 83, 133); 
+    color: rgb(63, 83, 133); 
+}
+
 //https://codepen.io/swieder/pen/RNqVqY -> Code for animating in or out
 @-webkit-keyframes slideInBothWays {
     
