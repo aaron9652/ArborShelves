@@ -1,7 +1,7 @@
 
 <ion-header >
   <ion-toolbar class="bgh-class">
-    <ion-title>history</ion-title>
+    <ion-title >history</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,14 +25,14 @@
               <p>Last completed</p> 10:45 AM
             </ion-note>
           </ion-item>      
-          <ion-item-options side="end" (click)="boxTest('history' + i);">
+          <ion-item-options id="'showHis' + i" side="end" (click)="boxTest('history' + i, 'showHis' + i);">
             <ion-item-option color="danger" >
               <ion-icon slot="icon-only" name="book"  ></ion-icon>
             </ion-item-option>          
           </ion-item-options>
         </ion-item-sliding>
         <div>
-        <ion-list [attr.id]="'history' + i" hidden class="his-class slide-in-both-ways">
+        <ion-list [attr.id]="'history' + i" style="display: none" class="his-class slide-in-reverse">
             <ion-item class="his-class " onclick="a()" >asdf</ion-item>
             <ion-item class="his-class " >asdf</ion-item>
             <ion-item class="his-class " >asdf</ion-item>
@@ -44,19 +44,19 @@
     </ion-list>
     
 
-
-    <!-- <ion-infinite-scroll  >
+<!-- <ion-list (click)="disTest()" id="listVis">
+     <ion-infinite-scroll  >
         <ion-infinite-scroll-content
           loadingSpinner="bubbles"
           loadingText="Loading more data...">
-          <ion-item *ngFor = "let la of test;"> {{la}} 
+          <ion-item  *ngFor = "let la of test;"> {{la}} 
       
             </ion-item>
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
-  <ion-list>
+</ion-list>   -->
     
-  </ion-list> -->
+  
 
 </ion-content>
 <script >

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild  } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Script } from 'vm';
 import { delay } from 'q';
+import { del } from 'selenium-webdriver/http';
 
 
 @Component({
@@ -35,25 +36,36 @@ export class HistoryPage implements OnInit {
     let elementId: string = (event.target as Element).id;
     console.log(elementId);
   }
-  async boxTest(name: any){
+  async boxTest(name: any, button: any){
     
+
     
-    
-    if (document.getElementById(name).hidden == true){ 
-      document.getElementById(name).toggleAttribute("hidden");
+    if (document.getElementById(name).style.display == 'none'){ 
+      document.getElementById(name).classList.replace("slide-in-reverse","slide-in-both-ways")
+      document.getElementById(name).style.display = 'block';
+      
+      
       
     } 
     else{
-      document.getElementById(name).classList.toggle("slide-in-both-ways");
-      document.getElementById(name).classList.toggle("slide-in-reverse"); 
+      var myBox = document.getElementById(name);
       
-      //document.getElementById(name).classList.replace("slide-in-both-ways","slide-in-reverse");
-      //document.getElementById(name).hidden = true; 
+      myBox.addEventListener("webkitAnimationEnd", function handler(e){ 
+      myBox.style.display = 'none'; e.currentTarget.removeEventListener(e.type, handler); }, false);
+      myBox.classList.replace("slide-in-both-ways","slide-in-reverse");
     }
 
   }
-  toggle(){
-  document.getElementById("item").classList.toggle  
+  handler = function(event){
+    removeEventListener("webkitAnimationEnd", this.handler, false);
+    
+  }
+  toggle(name: any){
+    document.getElementById(name).style.display = 'none'; 
+  }
+  disTest(){
+    console.log("hit"); 
+    document.getElementById("listVis").style.visibility = "Hidden"; 
   }
   
 }

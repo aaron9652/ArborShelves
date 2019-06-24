@@ -17,12 +17,22 @@
     background-color: rgb(63, 83, 133);
     --color: rgb(234, 203, 136);
     color: rgb(234, 203, 136);
-
+ 
 }
+.his-class-dis{
+  --background: rgb(93, 119, 185); 
+    background-color: rgb(63, 83, 133);
+    --color: rgb(234, 203, 136);
+    color: rgb(234, 203, 136);
+  display: block; 
+}
+//https://codepen.io/swieder/pen/RNqVqY -> Code for animating in or out
 @-webkit-keyframes slideInBothWays {
     
   0% {
+     
     -webkit-transform: translate3d(-100%,0,0);
+    
   }
 
 
@@ -39,10 +49,11 @@
   animation-fill-mode: forwards;
   -webkit-animation-duration: .5s;
   animation-duration: .5s;
+
    
 }
 .slide-in-both-ways {
-    
+     
     -webkit-animation: slideInBothWays ease-in 1; 
    animation: slideInBothWays ease-in 1;
    -webkit-animation-fill-mode: forwards;
@@ -59,9 +70,9 @@
     }
   
   
-  
-    100% {
+
+    100%{
       -webkit-transform: translate3d(-100%,0,0);
-      display: block;
+ 
     }
   }
