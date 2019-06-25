@@ -4,15 +4,18 @@ import { Script } from 'vm';
 import { delay } from 'q';
 import { del } from 'selenium-webdriver/http';
 import { HttpClient } from '@angular/common/http';
+import { throws } from 'assert';
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.page.html',
   styleUrls: ['./history.page.scss'],
 })
-export class HistoryPage implements OnInit {
-  public dbUrl = "https://arborshelvestest.firebaseio.com/Boxes/Box0.json"; 
-  public boxes: Object = this.getBox(this.dbUrl).subscribe(); 
+export class HistoryPage implements OnInit 
+ {
+  public boxd: any[]=[];
+  public dbUrl = "https://arborshelvestest.firebaseio.com/Boxes.json"; 
+  public boxes: Object;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   test:any[]=[]; 
   listTest:any[]=[]; 
@@ -35,12 +38,30 @@ export class HistoryPage implements OnInit {
       "label"
     ];
   }
-
+   
   ngOnInit() {
+    this.getBox(this.dbUrl).subscribe(data=>{this.boxd =  JSON.parse(JSON.stringify(data)); console.log(this.boxd);});
+    
+    //this.db(); 
   }
 
   getBox(url) {
     return this.http.get(url);
+  }
+    
+  async db(){
+    let k = 10; 
+    let cnt = 0; 
+    
+    let obj    
+    while(cnt<k){
+      let box = "box" + cnt; 
+      let his = "history" + cnt; 
+      obj = { [box]: {"history1": {"egg": "done", "water": "done", "food": "done", "temp": "done"} }  };
+      this.http.put(this.dbUrl, obj).subscribe((data)=>{});
+      cnt++; 
+    }  
+     
   }
 
   
