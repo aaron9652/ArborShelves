@@ -117,7 +117,7 @@ export class BoxCLstPage implements OnInit {
     await actionSheet.present();
   }
 
-  
+  chkClick(idx: number){ (this.chkBxBool[idx].value) ? this.dbLabel[idx].value = "Completed by "+this.id : this.dbLabel[idx].value = "Not Completed"; }
 
   ngOnInit() {
     try{
@@ -140,7 +140,7 @@ export class BoxCLstPage implements OnInit {
   }
   }
 
-  chkClick(idx: number){ (this.chkBxBool[idx].value) ? this.dbLabel[idx].value = "Completed by "+this.id : this.dbLabel[idx].value = "Not Completed"; }
+  
 
 }
 
