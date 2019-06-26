@@ -7,7 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { throws } from 'assert';
 import { DatePipe } from '@angular/common';
 import * as firebase from 'firebase/app'; 
-import { FirebaseDatabase } from '@angular/fire';
+import { FirebaseApp } from '@angular/fire';
+
 
 
 @Component({
@@ -28,7 +29,27 @@ export class HistoryPage implements OnInit
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll; 
   
   constructor(public datePipe: DatePipe, public http: HttpClient ) { 
-
+    
+    var a = "https://arborshelvestest.firebaseio.com/Boxes"; 
+    var lst = firebase.database().refFromURL("https://arborshelvestest.firebaseio.com/Boxes/box0"); 
+    // lst.set({
+    //   food: "this"
+    // });
+    lst.orderByKey().limitToLast(1).on("child_added", function(snapshot) {
+      console.log(snapshot.key);
+    });
+    // var db = firebase.database().ref("Boxes");
+    
+    // var newMessageRef = db.push(); 
+    // newMessageRef.set({
+    //   'user_id': 'ada',
+    //   'tex': 'The Analytical Engine weaves algebraical patterns just as the Jacquard loom weaves flowers and leaves.'
+    // });
+     
+     
+    
+    //console.log(db); 
+     
   }
    
   ngOnInit() {

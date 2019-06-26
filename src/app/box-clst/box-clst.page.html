@@ -12,22 +12,22 @@
 
 <ion-content class="bg-class" >
   <div class="div-class">
-    <ion-item class="list-class" > Give Crickets Food <ion-label></ion-label>  <ion-checkbox class="cBox-class" [(ngModel)]="chkBxBool[0].value" ></ion-checkbox>  </ion-item>
+    <ion-item class="list-class" > Give Crickets Food <ion-label></ion-label>  <ion-checkbox id="fdChk" (click)="chkClick(0)" class="cBox-class" [(ngModel)]="chkBxBool[0].value" ></ion-checkbox>  </ion-item>
     <ion-label text-wrap class="lab-class" >{{boxes.food}}</ion-label>
  </div>
   
   <div class="div-class">
-    <ion-item class="list-class" text-wrap> Give Crickets Water <ion-label></ion-label> <ion-checkbox class="cBox-class" [(ngModel)]="chkBxBool[1].value" ></ion-checkbox>  </ion-item>
+    <ion-item class="list-class" text-wrap> Give Crickets Water <ion-label></ion-label> <ion-checkbox id="wtChk" (click)="chkClick(1)" class="cBox-class" [(ngModel)]="chkBxBool[1].value" ></ion-checkbox>  </ion-item>
     <ion-label text-wrap class="lab-class">{{boxes.water}}</ion-label>
   </div>
 
   <div class="div-class">
-    <ion-item class="list-class"> Check Box Temperature <ion-label></ion-label> <ion-checkbox class="cBox-class" [(ngModel)]="chkBxBool[2].value" ></ion-checkbox>  </ion-item>
+    <ion-item class="list-class"> Check Box Temperature <ion-label></ion-label> <ion-checkbox id="tmChk" (click)="chkClick(2)" class="cBox-class" [(ngModel)]="chkBxBool[2].value" ></ion-checkbox>  </ion-item>
     <ion-label text-wrap class="lab-class">{{boxes.temp}}</ion-label>
   </div>
 
   <div class="div-class">
-    <ion-item class="list-class"> Cycle Egg Container <ion-label></ion-label> <ion-checkbox class="cBox-class" [(ngModel)]="chkBxBool[3].value" ></ion-checkbox>  </ion-item>
+    <ion-item class="list-class"> Cycle Egg Container <ion-label></ion-label> <ion-checkbox id="egChk" (click)="chkClick(3)" class="cBox-class" [(ngModel)]="chkBxBool[3].value" ></ion-checkbox>  </ion-item>
     <ion-label text-wrap class="lab-class"> {{boxes.egg}}</ion-label>
   </div>
 
