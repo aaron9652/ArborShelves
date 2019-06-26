@@ -6,6 +6,7 @@ import { AppComponent } from '../app.component';
 import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -15,10 +16,13 @@ import { Observable } from 'rxjs';
 })
 export class BoxCLstPage implements OnInit {
 
-  dbUrl = '';
+  public dbUrl = '';
+  public dbDir; 
   public boxes: Object;
   public date = new Date();
-
+  
+  
+  
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
 
@@ -28,35 +32,40 @@ export class BoxCLstPage implements OnInit {
     [{ value: '' }, { value: '' }, { value: '' }, { value: '' }]
 
 
-  constructor(public barcodeScanner: BarcodeScanner, public navCtrl: NavController, public http: HttpClient, public alertController: AlertController, public actionSheetController: ActionSheetController, public appC: AppComponent, public af: AngularFireAuth) {
+  constructor(public datePipe: DatePipe, public barcodeScanner: BarcodeScanner, public navCtrl: NavController, public http: HttpClient, public alertController: AlertController, public actionSheetController: ActionSheetController, public appC: AppComponent, public af: AngularFireAuth) {
   this.user = af.authState;
   this.user.subscribe((user) =>{
     this.userDetails = user; 
   });
-  
+  var date = this.datePipe.transform(new Date(),"MM-dd-yyyy h:mm a");
+  console.log(date);
   }
 
   async sendBox() {
-    var dateSp = this.date.toString().split('GMT');
+    
+    let boxObj =  [this.date.toString()] ; 
+    await this.http.put(this.dbUrl, boxObj); 
+       
+   
 
     if (this.chkBxBool[0].value == true) {
-      await this.http.patch(this.dbUrl, {
-        food: 'Last Completed by ' + this.userDetails.displayName.toString() + " " + dateSp[0]
+      await this.http.patch(this.dbDir, {
+        food: 'Last Completed by ' + this.userDetails.displayName.toString() 
       }).subscribe((data) => { });
     }
     if (this.chkBxBool[1].value == true) {
-      await this.http.patch(this.dbUrl, {
-        water: 'Last Completed by ' + this.userDetails.displayName.toString() + " " +dateSp[0]
+      await this.http.patch(this.dbDir, {
+        water: 'Last Completed by ' + this.userDetails.displayName.toString() 
       }).subscribe((data) => { });
     }
     if (this.chkBxBool[2].value == true) {
-      await this.http.patch(this.dbUrl, {
-        temp: 'Last Completed by ' + this.userDetails.displayName.toString() + " " + dateSp[0]
+      await this.http.patch(this.dbDir, {
+        temp: 'Last Completed by ' + this.userDetails.displayName.toString() 
       }).subscribe((data) => { });
     }
     if (this.chkBxBool[3].value == true) {
-      await this.http.patch(this.dbUrl, {
-        egg: 'Last Completed by ' + this.userDetails.displayName.toString() + " " +dateSp[0]
+      await this.http.patch(this.dbDir, {
+        egg: 'Last Completed by ' + this.userDetails.displayName.toString() 
       }).subscribe((data) => { });
     }
   }
@@ -101,7 +110,8 @@ export class BoxCLstPage implements OnInit {
     try{
     this.barcodeScanner.scan().then(barcodeData => {
       if(barcodeData.text != null && barcodeData.text != ""){
-      this.dbUrl = barcodeData.text;
+      this.dbUrl = barcodeData.text + ".json";
+      this.dbDir = barcodeData.text + "/" + this.date.toString() + ".json"; 
       this.getBox(barcodeData.text).subscribe(data => { this.boxes = data; });
       }
       else{

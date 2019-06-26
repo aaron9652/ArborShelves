@@ -35,7 +35,7 @@
             <div *ngFor = "let history of boxes.value | keyvalue; let k = index" class="bg-class" >
               <ion-item  class="innerList-class"(click)="boxTest('his'+i+k)">Date{{k}}</ion-item>
               <ion-list no-padding class="ininnerList-class slide-in-reverse" [attr.id]="'his'+i+k" style="display: none;" >
-                  <ion-item class="ininnerList-class " *ngFor = "let duties of history.value | keyvalue">asdf</ion-item>
+                  <ion-item class="ininnerList-class " *ngFor = "let duties of history.value | keyvalue">{{duties.key}}: {{duties.value}}</ion-item>
               </ion-list>
             </div>
           </ion-list>

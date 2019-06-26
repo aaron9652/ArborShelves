@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import {BoxCLstPage} from './box-clst/box-clst.page'; 
 import {HomePage} from "./home/home.page";
-
+import { DatePipe } from '@angular/common';
 
 import { AngularFireModule } from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
@@ -45,6 +45,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     SplashScreen,
     BarcodeScanner,
     Network,
+    DatePipe, 
   
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
