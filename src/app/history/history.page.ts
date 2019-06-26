@@ -54,6 +54,8 @@ export class HistoryPage implements OnInit
    
   ngOnInit() {
     this.getBox(this.dbUrl).subscribe(data=>{this.boxd =  JSON.parse(JSON.stringify(data)); console.log(this.boxd);}); 
+    
+    
   }
 
   getBox(url) {
