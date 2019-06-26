@@ -46,6 +46,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     BarcodeScanner,
     Network,
     DatePipe, 
+    
   
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

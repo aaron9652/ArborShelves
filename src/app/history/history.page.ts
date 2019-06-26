@@ -5,6 +5,10 @@ import { delay } from 'q';
 import { del } from 'selenium-webdriver/http';
 import { HttpClient } from '@angular/common/http';
 import { throws } from 'assert';
+import { DatePipe } from '@angular/common';
+import * as firebase from 'firebase/app'; 
+import { FirebaseDatabase } from '@angular/fire';
+
 
 @Component({
   selector: 'app-history',
@@ -13,36 +17,22 @@ import { throws } from 'assert';
 })
 export class HistoryPage implements OnInit 
  {
+ 
+  
+ 
+ 
+  public dbDir; 
   public boxd: any[]=[];
   public dbUrl = "https://arborshelvestest.firebaseio.com/Boxes.json"; 
   public boxes: Object;
-  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-  test:any[]=[]; 
-  listTest:any[]=[]; 
-  public testID; 
-  constructor(public http: HttpClient) { 
-    this.test = [
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label"
-    ];
-    this.listTest = [
-      "label",
-      "label",
-      "label",
-      "label",
-      "label",
-      "label"
-    ];
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll; 
+  
+  constructor(public datePipe: DatePipe, public http: HttpClient ) { 
+
   }
    
   ngOnInit() {
-    this.getBox(this.dbUrl).subscribe(data=>{this.boxd =  JSON.parse(JSON.stringify(data)); console.log(this.boxd);});
-    
-    //this.db(); 
+    this.getBox(this.dbUrl).subscribe(data=>{this.boxd =  JSON.parse(JSON.stringify(data)); console.log(this.boxd);}); 
   }
 
   getBox(url) {
@@ -50,15 +40,28 @@ export class HistoryPage implements OnInit
   }
     
   async db(){
+    
+    // let boxObj =  ["ob"];
+    // this.http.patch("https://arborshelvestest.firebaseio.com/Boxes.json", boxObj).subscribe((data) => {});
     let k = 10; 
     let cnt = 0; 
-    
-    let obj    
-    while(cnt<k){
-      let box = "box" + cnt; 
-      let his = "history" + cnt; 
-      obj = { [box]: {"history1": {"egg": "done", "water": "done", "food": "done", "temp": "done"} }  };
-      this.http.put(this.dbUrl, obj).subscribe((data)=>{});
+    // let dscInp = "things"; 
+    let obj;
+        
+         let his;
+         let cnt2 = 0; 
+         let box; 
+         while(cnt<k){
+    cnt2 = 0; 
+    box = "box" + cnt; 
+       
+      while(cnt2<k){
+        his = "history" + cnt2;
+        obj = {"egg": "done", "water": "done", "food": "done", "temp": "done", "description": "needs...."   };
+        let tas = this.http.put("https://arborshelvestest.firebaseio.com/Boxes/"+box+"/"+his+".json", obj).subscribe((data)=>{});
+        await tas; 
+        cnt2++;
+    }
       cnt++; 
     }  
      

@@ -16,13 +16,11 @@ import { DatePipe } from '@angular/common';
 })
 export class BoxCLstPage implements OnInit {
 
-  public dbUrl = '';
+  public dbUrl;
   public dbDir; 
   public boxes: Object;
   public date = new Date();
-  
-  
-  
+
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
 
@@ -33,41 +31,44 @@ export class BoxCLstPage implements OnInit {
 
 
   constructor(public datePipe: DatePipe, public barcodeScanner: BarcodeScanner, public navCtrl: NavController, public http: HttpClient, public alertController: AlertController, public actionSheetController: ActionSheetController, public appC: AppComponent, public af: AngularFireAuth) {
-  this.user = af.authState;
-  this.user.subscribe((user) =>{
-    this.userDetails = user; 
-  });
-  var date = this.datePipe.transform(new Date(),"MM-dd-yyyy h:mm a");
-  console.log(date);
+  
+    this.user = af.authState;
+  
+    this.user.subscribe((user) =>{
+      this.userDetails = user; 
+    });
+    
+    var date = this.datePipe.transform(new Date(),"MM-dd-yyyy h:mm a");
+    console.log(date);
   }
 
   async sendBox() {
+    var dscInp = document.getElementById("chkDescription").textContent;    
+  
+    let boxObj =  {[this.date.toString()] : {description: [dscInp]}};
+    let sendOrder = await this.http.patch(this.dbUrl, boxObj).subscribe((data) => {});
+    let food = await this.http.patch(this.dbDir, {
+      food:  "Aaron"  
+    }).subscribe((data) => { });
+    let water = await this.http.patch(this.dbDir, {
+      water:  "Aaron"  
+    }).subscribe((data) => { });
+    let temp = await this.http.patch(this.dbDir, {
+      temp:  "Aaron" 
+    }).subscribe((data) => { });
+    let egg = await this.http.patch(this.dbDir, {
+      egg:  "Aaron" 
+    }).subscribe((data) => { });
+    let description = await this.http.patch(this.dbDir, {
+      description:  "Aaron" + ": " + dscInp 
+    }).subscribe((data) => { });
     
-    let boxObj =  [this.date.toString()] ; 
-    await this.http.put(this.dbUrl, boxObj); 
-       
-   
-
-    if (this.chkBxBool[0].value == true) {
-      await this.http.patch(this.dbDir, {
-        food: 'Last Completed by ' + this.userDetails.displayName.toString() 
-      }).subscribe((data) => { });
-    }
-    if (this.chkBxBool[1].value == true) {
-      await this.http.patch(this.dbDir, {
-        water: 'Last Completed by ' + this.userDetails.displayName.toString() 
-      }).subscribe((data) => { });
-    }
-    if (this.chkBxBool[2].value == true) {
-      await this.http.patch(this.dbDir, {
-        temp: 'Last Completed by ' + this.userDetails.displayName.toString() 
-      }).subscribe((data) => { });
-    }
-    if (this.chkBxBool[3].value == true) {
-      await this.http.patch(this.dbDir, {
-        egg: 'Last Completed by ' + this.userDetails.displayName.toString() 
-      }).subscribe((data) => { });
-    }
+    await sendOrder;
+    await food; 
+    await water; 
+    await temp; 
+    await egg; 
+    await description;
   }
 
   getBox(url) {
