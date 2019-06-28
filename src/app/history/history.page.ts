@@ -8,7 +8,6 @@ import { throws } from 'assert';
 import { DatePipe } from '@angular/common';
 import * as firebase from 'firebase/app'; 
 import { FirebaseApp } from '@angular/fire';
-import { Key } from 'protractor';
 
 
 
@@ -19,91 +18,79 @@ import { Key } from 'protractor';
 })
 export class HistoryPage implements OnInit 
  {
+ 
   
-  public hstCls = class  {
-    constructor(
-                public food: string,
-                public water: string,
-                public egg: string,           
-                public temp: string, 
-                public time: string, 
-                public description: string){
-      
-  
-    }
-    //  public description: string; 
-    //  public egg: string; 
-    //  public food: string; 
-    //  public temp: string; 
-    //  public time: string; 
-    //  public water: string; 
-        
-      
-  };
-  public boxCls = class{
-    constructor(public histories: any[]=[]){}
-
-  } 
-  
-  public boxAry: any[]=[]; 
-   
-  public lsTst: any[] = []; 
-  public boxIdx = 0; 
+ 
+ 
   public dbDir; 
-  public boxd: any;
+  public boxd: any[]=[];
   public dbUrl = "https://arborshelvestest.firebaseio.com/Boxes.json"; 
   public boxes: Object;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll; 
   
   constructor(public datePipe: DatePipe, public http: HttpClient ) { 
     
-    // var a = "https://arborshelvestest.firebaseio.com/Boxes"; 
-    // var lst = firebase.database().refFromURL("https://arborshelvestest.firebaseio.com/Boxes/box0"); 
-
-    // lst.orderByKey().limitToLast(1).on("child_added", function(snapshot) {
-    //   console.log(snapshot.key);
+    var a = "https://arborshelvestest.firebaseio.com/Boxes"; 
+    var lst = firebase.database().refFromURL("https://arborshelvestest.firebaseio.com/Boxes/box0"); 
+    // lst.set({
+    //   food: "this"
     // });
+    lst.orderByKey().limitToLast(1).on("child_added", function(snapshot) {
+      console.log(snapshot.key);
+    });
+    // var db = firebase.database().ref("Boxes");
     
+    // var newMessageRef = db.push(); 
+    // newMessageRef.set({
+    //   'user_id': 'ada',
+    //   'tex': 'The Analytical Engine weaves algebraical patterns just as the Jacquard loom weaves flowers and leaves.'
+    // });
+     
+     
+    
+    //console.log(db); 
      
   }
-  async ngOnInit() {
-    let idx = 0; 
-
-    let subBox = await this.getBox(this.dbUrl).subscribe(data=>{
-      this.boxd =  JSON.parse(JSON.stringify(data)); 
-      Object.values(this.boxd).map(boxes=>{
-        let hstAry: any[]=[];
-        Object.values(boxes).map(history=>{
-          hstAry.push(new this.hstCls(history.food, history.water, history.egg, history.temp, history.time, history.description)); 
-        });
-        this.boxAry.push(hstAry);  
-         
-      });
-      console.log(this.boxAry); 
-      // for(let k = 0; k < this.lsTst.length; k++){
-      //   this.boxClss.push(new boxCls());
-      // }
-      
-      
-    }); 
-     
-    // this.getBox(this.dbUrl).subscribe(data=>{
-    //    let  Object.keys(this.boxd).map(key => (console.log(key)));console.log(this.boxd); });
-    // let  map = await 
-    await subBox; 
-    //await map; 
-    console.log("test");
-    // this.boxd.forEach(boxes=>{
-    //   boxes.forEach(element => {
-        
-    //   });
-    // }) 
+   
+  ngOnInit() {
+    this.getBox(this.dbUrl).subscribe(data=>{this.boxd =  JSON.parse(JSON.stringify(data)); console.log(this.boxd);}); 
+    
+    
   }
 
   getBox(url) {
     return this.http.get(url);
   }
+    
+  async db(){
+    
+    // let boxObj =  ["ob"];
+    // this.http.patch("https://arborshelvestest.firebaseio.com/Boxes.json", boxObj).subscribe((data) => {});
+    let k = 10; 
+    let cnt = 0; 
+    // let dscInp = "things"; 
+    let obj;
+        
+         let his;
+         let cnt2 = 0; 
+         let box; 
+         while(cnt<k){
+    cnt2 = 0; 
+    box = "box" + cnt; 
+       
+      while(cnt2<k){
+        his = "history" + cnt2;
+        obj = {"egg": "done", "water": "done", "food": "done", "temp": "done", "description": "needs...."   };
+        let tas = this.http.put("https://arborshelvestest.firebaseio.com/Boxes/"+box+"/"+his+".json", obj).subscribe((data)=>{});
+        await tas; 
+        cnt2++;
+    }
+      cnt++; 
+    }  
      
+  }
+
+  
   async boxTest(name: any){
 
     if (document.getElementById(name).style.display == 'none'){ 
@@ -119,14 +106,18 @@ export class HistoryPage implements OnInit
     }
 
   }
-  callTest(num: any){
-    console.log(num); 
-  }
-  trackElement(element: any) {
-    console.log(element);
+  handler = function(event){
+    removeEventListener("webkitAnimationEnd", this.handler, false);
     
-    //return element ? element.guid : null
   }
+  toggle(name: any){
+    document.getElementById(name).style.display = 'none'; 
+  }
+  disTest(){
+    console.log("hit"); 
+    document.getElementById("listVis").style.visibility = "Hidden"; 
+  }
+  
 }
 
 

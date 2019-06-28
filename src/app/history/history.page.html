@@ -11,19 +11,18 @@
 </ion-header>
 
 <ion-content class="bg-class " >
-    
+
   <ion-list class="bg-class" >
-    <div  class="bg-class"  *ngFor = "let boxes of boxAry; let i = index;">
-      
+    <div  class="bg-class"  *ngFor = "let boxes of boxd | keyvalue; let i = index">
     <ion-list  id="{{testID}}" class="bg-class" >
       <ion-item-sliding [attr.id]="'box' + i" >
           <ion-item class="bg-class" >
             
             <ion-label style="font-family:'Muli', sans-serif;">
-              <h1>Box #{{i}} </h1>            
+              <h1>Box #{{i}}</h1>            
             </ion-label>
             <ion-note slot="end">
-              <p></p> 
+              <p>Last completed</p> 10:45 AM
             </ion-note>
           </ion-item>      
           <ion-item-options id="'showHis' + i" side="end" (click)="boxTest('history' + i)">
@@ -32,27 +31,20 @@
             </ion-item-option>          
           </ion-item-options>
         </ion-item-sliding>
-
-              <ion-list padding [attr.id]="'history' + i" style="display: none" class="his-class slide-in-reverse">
-                  <div *ngFor = "let history of boxes; let k=index;" class="bg-class" >           
-                    <ion-item  class="innerList-class"(click)="boxTest('his'+i+k)">  {{boxAry[0][0].time}}    </ion-item>
-                    <ion-list no-padding class="ininnerList-class slide-in-reverse" [attr.id]="'his'+i+k" style="display: none;" >
-                        <!-- <ion-item class="ininnerList-class " *ngFor = "let duties of history | keyvalue"> {{boxAry[i][k].time}} </ion-item>  -->
-                        <ion-item class="ininnerList-class " > Food: {{boxAry[i][k].food}} </ion-item> 
-                        <ion-item class="ininnerList-class " > Water: {{boxAry[i][k].water}} </ion-item> 
-                        <ion-item class="ininnerList-class " > Egg: {{boxAry[i][k].egg}} </ion-item> 
-                        <ion-item class="ininnerList-class " > Tempreture: {{boxAry[i][k].temp}} </ion-item> 
-                        <ion-item class="ininnerList-class " > Completed On: {{boxAry[i][k].time}} </ion-item> 
-                        <ion-item class="ininnerList-class " > Note: {{boxAry[i][k].description}} </ion-item> 
-                    </ion-list>
-                  </div>
-                </ion-list>         
+        <ion-list padding [attr.id]="'history' + i" style="display: none" class="his-class slide-in-reverse">
+            <div *ngFor = "let history of boxes.value | keyvalue; let k = index" class="bg-class" >
+              <ion-item  class="innerList-class"(click)="boxTest('his'+i+k)">{{history.key}}</ion-item>
+              <ion-list no-padding class="ininnerList-class slide-in-reverse" [attr.id]="'his'+i+k" style="display: none;" >
+                  <ion-item class="ininnerList-class " *ngFor = "let duties of history.value | keyvalue">{{duties.key}}: {{duties.value}}</ion-item>
+              </ion-list>
+            </div>
+          </ion-list>
       </ion-list>
     </div>
       
     </ion-list>
     
-<!-- array? Binding?-->
+
 <!-- <ion-list (click)="disTest()" id="listVis">
      <ion-infinite-scroll  >
         <ion-infinite-scroll-content
