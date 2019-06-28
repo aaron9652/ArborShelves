@@ -1,6 +1,6 @@
-import { Component, OnInit, ElementRef, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { IonicModule, NavController, AlertController, ActionSheetController } from '@ionic/angular';
+import { IonicModule, NavController, AlertController, ActionSheetController, IonSlides } from '@ionic/angular';
 import { BoxCLstPage } from '../box-clst/box-clst.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Network } from '@ionic-native/network/ngx';
@@ -10,12 +10,14 @@ import { FirebaseAuth } from '@angular/fire';
 import { Observable } from 'rxjs';
 
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  
   public qrHref = "";
   public hsHref = "";
   private user: Observable<firebase.User>;
@@ -23,12 +25,13 @@ export class HomePage implements OnInit {
   public loggedIn = false;
   functions: any;
   
+  
   //https://stackoverflow.com/questions/53670047/angular-firebase-auth-how-to-check-if-user-is-logged-in-to-hide-login-link-from
 
   constructor(public navCtrl: NavController, public barcodeScanner: BarcodeScanner, public alertController: AlertController, public actionSheetController: ActionSheetController, public network: Network, public appC: AppComponent, public el: ElementRef, @Inject(DOCUMENT) document, public af: AngularFireAuth) {
     this.user = af.authState;
     this.loggedIn = !!sessionStorage.getItem('user');
-
+     
     this.user.subscribe(
         (user) => {
           if (user) {
@@ -46,6 +49,7 @@ export class HomePage implements OnInit {
     alert("check network");
   });
   ngOnInit() {
+    
   }
   
    chkAuth() {
@@ -71,7 +75,17 @@ export class HomePage implements OnInit {
     console.log("signed out");
     this.navCtrl.navigateForward("/log-in");  
   }
-
+  refreshBoxSlides(stopClose: Event){
+    var slides = document.getElementById("boxSlides"); 
+    //slides.getAttributeNames(true);
+    var a = slides.getAttributeNames; 
+     
+    slides.dom
+    stopClose.stopPropagation(); 
+    console.log(slides.dataset);//dom7ElementDataStorage.swiper.allowSlideNext
+    document.getElementById("refreshIcon").toggleAttribute("hidden"); 
+    document.getElementById("refreshSpinner").toggleAttribute("hidden"); 
+  }
 
 }
 

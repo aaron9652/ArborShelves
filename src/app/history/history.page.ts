@@ -44,7 +44,11 @@ export class HistoryPage implements OnInit
     constructor(public histories: any[]=[]){}
 
   } 
-  
+  slideOpts = {
+    initialSlide: 1,
+    speed: 40000
+  };
+  public items = ["adsf","adsf","adsf","adsf","adsf","adsf","adsf","adsf","adsf"]
   public boxAry: any[]=[]; 
    
   public lsTst: any[] = []; 

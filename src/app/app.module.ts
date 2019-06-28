@@ -14,6 +14,7 @@ import {HomePage} from "./home/home.page";
 import { DatePipe } from '@angular/common';
 
 import { AngularFireModule } from '@angular/fire';
+
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FirebaseUIModule} from 'firebaseui-angular';
 import * as firebase from 'firebase/app';

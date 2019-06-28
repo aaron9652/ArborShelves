@@ -11,24 +11,50 @@
 
 <ion-content class="content-class bg-class">
   <div class="grid-container">
+    
     <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div>
-      <ion-button href="{{ hsHref }}"  class="mainScButtons" id="hsLstButton" expand="block" size="large" fill ="outline" shape="round">Box History</ion-button>
-      <ion-button href="{{ qrHref }}"  class="mainScButtons" id="chkLstButton" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button>
+    <div class="buttonGrid">
+      <div class="flexcontainer">
+        <ion-button href="{{ hsHref }}"  class="mainScButtons" id="hsLstButton" expand="block" size="large" fill ="outline" shape="round">Box History</ion-button>
+      </div> 
+      <div class="flexcontainer">
+          <ion-button href="{{ qrHref }}"  class="mainScButtons" id="chkLstButton" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button>
+      </div>
     </div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    
+    <div class="fabButtonGrid">
+      
+      <div class="flexcontainer">
+        <ion-fab class="fabButton flexcontainer" slot="fixed" start  style="float: left;">
+          <ion-fab-button class="fabButton">
+            <ion-label class="fabButton">To-Do</ion-label>
+          </ion-fab-button>
+          <ion-fab-list side="top">
+              <ion-fab-button class="fabRefresh" (click)="refreshBoxSlides($event); "><ion-icon id="refreshIcon" class="fabRefresh" name="refresh"></ion-icon><ion-spinner id="refreshSpinner" class="refreshSpinner" hidden></ion-spinner></ion-fab-button>
+          </ion-fab-list>
+          <ion-fab-list side="end" class="fabList" >
+              <ion-slides id="boxSlides" class="card"  >
+                  <ion-slide >
+                    <ion-card class="card">
+                      <h1>Slide 1</h1>
+                    </ion-card> 
+                  </ion-slide>
+                  <ion-slide>
+                    <ion-card class="card">
+                      <h1>Slide 2</h1>
+                    </ion-card>
+                  </ion-slide>
+                  <ion-slide>
+                    <ion-card class="card">
+                      <h1>Slide 3</h1>
+                    </ion-card>
+                  </ion-slide>
+                </ion-slides>
+          </ion-fab-list>
+        </ion-fab>
+      </div>     
+    </div>
+    
   </div>
 </ion-content>
 

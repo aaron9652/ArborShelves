@@ -13,6 +13,14 @@
     --background: rgb(58, 66, 113);
     --color: rgb(234, 203, 136);
     font-family: 'Muli', sans-serif; 
+    width: 50vw; 
+}
+
+.fabButton{
+    size: 100%; 
+    color: rgb(255, 255, 255); 
+    --background: rgb(234, 203, 136);
+    font-family: 'Muli', sans-serif;
 }
 
 .header-class{
@@ -28,17 +36,30 @@
 
 .grid-container{
     display: grid; 
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    
+    grid-template-rows: repeat(3, 1fr);
     width: 100vw;
     height: 90vh;
+}
+.buttonGrid{
+    display: grid; 
+    grid-template-rows: repeat(2, 1fr);
 }
 
 .ti-class{
     color: linear-gradient(270deg,rgb(227, 255, 214) 0%, rgb(214, 255, 206) 13.5%, rgb(214, 255, 212) 33.33%, rgb(210, 226, 255) 100%) !important;
     font-family: 'Muli', sans-serif;
 }
-
+.flexcontainer {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+ }
 .div-class{
     position: absolute;
     top: 0%;
@@ -51,6 +72,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.round-button:active{
+    background-color: rgb(187, 162, 109);
+  }
+  .round-button{
+  min-width: 60px;
+  max-width:120px;
+  text-decoration: none;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  border-style: none;
+  color: white;
+  background-color: rgb(234, 203, 136);
+  border-radius: 100%;
+  overflow: none;
+  text-align: center;
+  padding:0;
+}
+.round-button:before {
+  content:'';
+  display:inline-block;;
+  vertical-align:middle;
+  padding-top:100%;
 }
 .userName{
     color: rgb(234, 203, 136);
@@ -78,3 +123,32 @@
     font-size: 15px; 
     --color: white; 
 }
+.card {
+    //padding-bottom: 20%;
+    --background: rgb(234, 203, 136);
+    margin-top: 0;
+    margin-bottom: 0; 
+    
+ }
+ .fabList{
+     margin-left: 56px;
+      
+ }
+ .fabButtonGrid{
+     display: grid; 
+    grid-template-columns: repeat(3, 1fr);
+ }
+ .fabRefresh{
+    --background: rgb(58, 66, 113);
+    --color: rgb(234, 203, 136);
+    
+    
+  --border-color: white;
+  --border-width: 2px;
+  --border-style: solid;
+    
+ }
+ .refreshSpinner{
+     height: 4vh; 
+     width: 4vw;
+ }
