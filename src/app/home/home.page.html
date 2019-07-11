@@ -8,10 +8,8 @@
   <ion-button  hidden class="logIn-class" id="lOutButton" size="small" (click)="logOut()" > log out</ion-button> </div>
   <ion-label id="userName" class="userName"></ion-label>
   </ion-header>
-
 <ion-content class="content-class bg-class">
   <div class="grid-container">
-    
     <div></div>
     <div class="buttonGrid">
       <div class="flexcontainer">
@@ -20,42 +18,79 @@
       <div class="flexcontainer">
           <ion-button href="{{ qrHref }}"  class="mainScButtons" id="chkLstButton" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button>
       </div>
-    </div>
-    
-    <div class="fabButtonGrid">
-      
       <div class="flexcontainer">
         <ion-fab class="fabButton flexcontainer" slot="fixed" start  style="float: left;">
-          <ion-fab-button class="fabButton">
+          <ion-fab-button class="fabButton" (click)="toggleSlides()">
             <ion-label class="fabButton">To-Do</ion-label>
           </ion-fab-button>
-          <ion-fab-list side="top">
+          <ion-fab-list side="end">
               <ion-fab-button class="fabRefresh" (click)="refreshBoxSlides($event); "><ion-icon id="refreshIcon" class="fabRefresh" name="refresh"></ion-icon><ion-spinner id="refreshSpinner" class="refreshSpinner" hidden></ion-spinner></ion-fab-button>
           </ion-fab-list>
-          <ion-fab-list side="end" class="fabList" >
-              <ion-slides id="boxSlides" class="card"  >
-                  <ion-slide >
-                    <ion-card class="card">
-                      <h1>Slide 1</h1>
-                    </ion-card> 
-                  </ion-slide>
-                  <ion-slide>
-                    <ion-card class="card">
-                      <h1>Slide 2</h1>
-                    </ion-card>
-                  </ion-slide>
-                  <ion-slide>
-                    <ion-card class="card">
-                      <h1>Slide 3</h1>
-                    </ion-card>
-                  </ion-slide>
-                </ion-slides>
-          </ion-fab-list>
         </ion-fab>
-      </div>     
-    </div>
+      </div>
     
+    </div>
+    <div class="flexcontainer">
+
+        <!-- <ion-progress-bar type="indeterminate" hidden id="slidesRefresh"></ion-progress-bar> -->
+          <!-- options="{pagination: false}" -->
+          <div class="progress container">
+              <label>L</label>
+              <label>O</label>
+              <label>A</label>
+              <label>D</label>
+              <label>I</label>
+              <label>N</label>
+              <label>G</label>
+               <br/>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+    <ion-slides hidden  slidesPerView="1" zoom="false" style="padding: 0; " ng-hide="slides" id="slides"   #slides pager="false">
+      <ion-slide >
+        <ion-card >
+          <h1>Slide 1</h1>
+        </ion-card> 
+      </ion-slide>
+      <ion-slide>
+        <ion-card >
+          <h1>Slide 2</h1>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card >
+          <h1>Slide 3</h1>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
   </div>
+        <!-- <div class="fabButtonGrid">
+      
+            <div class="flexcontainer">
+              
+              <ion-fab class="fabButton flexcontainer" slot="fixed" ion-fixed  style="float: left;">
+                <ion-fab-button class="fabButton">
+                  <ion-label class="fabButton">To-Do</ion-label>
+                </ion-fab-button>
+                <ion-fab-list side="top">
+                    <ion-fab-button class="fabRefresh" (click)="refreshBoxSlides($event); "><ion-icon id="refreshIcon" class="fabRefresh" name="refresh"></ion-icon><ion-spinner id="refreshSpinner" class="refreshSpinner" hidden></ion-spinner></ion-fab-button>
+                </ion-fab-list>
+                <ion-fab-list side="end" class="fabList" >
+                    
+                </ion-fab-list>
+              </ion-fab>
+            </div>     
+          </div> -->
+          
+    
+      
+  </div>
+
 </ion-content>
 
 <script>
