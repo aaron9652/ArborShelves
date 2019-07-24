@@ -8,6 +8,8 @@ import { AppComponent } from '../app.component';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FirebaseAuth } from '@angular/fire';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { promise } from 'protractor';
 
 
 
@@ -18,6 +20,7 @@ import { Observable } from 'rxjs';
 })
 export class HomePage implements OnInit {
   @ViewChild('slides', {read: IonSlides}) slides: IonSlides;
+  public dbUrl = "https://arborshelvestest.firebaseio.com/Boxes.json"; 
   public swiper: any; 
   public qrHref = "";
   public hsHref = "";
@@ -27,10 +30,22 @@ export class HomePage implements OnInit {
   functions: any;
   public DOMSlides: any; 
   public slidesVisibility = false; 
+  public modelVisibility = false; 
   
+  public boxAry: any[]=[]; 
+  public modelBox: any[]=[];
+  public model = class {
+    constructor(
+      public food: string,
+      public water: string,
+      public egg: string,           
+      public temp: string, 
+      public time: string, 
+      public description: string){}
+  }
   //https://stackoverflow.com/questions/53670047/angular-firebase-auth-how-to-check-if-user-is-logged-in-to-hide-login-link-from
 
-  constructor(public navCtrl: NavController, public barcodeScanner: BarcodeScanner, public alertController: AlertController, public actionSheetController: ActionSheetController, public network: Network, public appC: AppComponent, public el: ElementRef, @Inject(DOCUMENT) document, public af: AngularFireAuth) {     
+  constructor(public navCtrl: NavController, public barcodeScanner: BarcodeScanner, public alertController: AlertController, public actionSheetController: ActionSheetController, public network: Network, public appC: AppComponent, public el: ElementRef, @Inject(DOCUMENT) document, public af: AngularFireAuth, public http: HttpClient) {     
     this.user = af.authState;
     this.loggedIn = !!sessionStorage.getItem('user');
      
@@ -51,9 +66,21 @@ export class HomePage implements OnInit {
     alert("check network");
   });
   ngOnInit() {
+    document.getElementById("slidesLoadingDiv").style.visibility = "hidden"; 
     this.DOMSlides = document.getElementById("slides");
-    this.DOMSlides.style.visibility = "hidden"; 
-     
+    
+    this.getBoxesForSlides(this.dbUrl).subscribe((boxes) =>{
+      let jsonBoxes = JSON.parse(JSON.stringify(boxes)); 
+      Object.values(jsonBoxes).map(box => {
+        Object.values(box).map(history => {
+          this.boxAry.push(new this.model(history.food, history.water, history.egg, history.temp, history.time, history.description));
+        }); 
+          
+      }); 
+      //this.boxAry.push(this.modelBox); 
+    }); 
+    
+    console.log(this.boxAry);  
   }
   
    chkAuth() {
@@ -79,23 +106,12 @@ export class HomePage implements OnInit {
     console.log("signed out");
     this.navCtrl.navigateForward("/log-in");  
   }
-  refreshBoxSlides(stopClose: Event){
-    // var slides = document.getElementById("slides");
-    // slides.toggleAttribute("hidden"); 
-    //slides.getAttributeNames(true);
-    //var a = slides.getAttributeNames; 
-     
-    // var sl = this.el.nativeElement;
-    // sl = slides;  
-  
-    
-    console.log(stopClose);
-    stopClose.stopPropagation();
-    //console.log(slides.dataset);//dom7ElementDataStorage.swiper.allowSlideNext
+  async refreshBoxSlides(stopClose: Event){        
+    let stop = stopClose.stopPropagation();
+    await stop; 
     document.getElementById("refreshIcon").toggleAttribute("hidden"); 
-    document.getElementById("refreshSpinner").toggleAttribute("hidden");
-    document.getElementById("slides").toggleAttribute("hidden");
-    document.getElementById("slidesRefresh").toggleAttribute("hidden");
+    document.getElementById("refreshSpinner").toggleAttribute("hidden");    
+    this.refresherToggleSlides();   
      
   }
   idxChng(){
@@ -106,17 +122,88 @@ export class HomePage implements OnInit {
     //this.slides.lockSwipes(true); 
     this.slides.slideNext();
   }
-  nextSlide($event) {
-    setTimeout(() => { this.slides.slideTo(1, 500); }, 500);
-  }
+
   toggleSlides(){
     if(this.slidesVisibility == true){
-      this.DOMSlides.style.visibility = "hidden"; 
-      this.slidesVisibility = false; 
-      return;
+      document.getElementById("slides").style.visibility = "hidden";
+      this.DOMSlides.addEventListener("webkitAnimationEnd", function handler(e){ 
+        document.getElementById("slides").classList.remove("ion-slidesOut");   
+        document.getElementById("slides").style.display = "none"; e.currentTarget.removeEventListener(e.type, handler); }, false);
+      document.getElementById("slides").classList.add("ion-slidesOut");            
+      
+        this.slidesVisibility = false; 
+      return true;
     } 
-    this.DOMSlides.style.visibility = "visible"; 
-    this.slidesVisibility = true; 
+    else{
+      document.getElementById("slides").style.display = "block"
+      this.DOMSlides.style.visibility = "visible"; 
+      this.slidesVisibility = true; 
+    }
+  }
+  refresherToggleSlides(){
+    if(this.slidesVisibility == true){
+      document.getElementById("slides").style.visibility = "hidden";
+      this.DOMSlides.addEventListener("webkitAnimationEnd", function handler(e){ 
+        document.getElementById("slidesLoadingDiv").style.visibility = "visible"; 
+        document.getElementById("slidesLoadingDiv").toggleAttribute("hidden");         
+        document.getElementById("slides").classList.remove("ion-slidesOut");   
+        document.getElementById("slides").style.display = "none"; e.currentTarget.removeEventListener(e.type, handler); }, false);
+      document.getElementById("slides").classList.add("ion-slidesOut");            
+      
+        this.slidesVisibility = false; 
+      return true;
+    } 
+    else{
+      document.getElementById("slidesLoadingDiv").toggleAttribute("hidden"); 
+      document.getElementById("slides").style.display = "block"
+      this.DOMSlides.style.visibility = "visible"; 
+      this.slidesVisibility = true; 
+    }
+  }
+  
+  getBoxesForSlides(url){
+    return this.http.get(url);
+  }
+
+  viewSlideBoxInfo(index){    
+    if(this.modelVisibility == false){          
+      var boxModel = document.getElementById("boxModel");
+      var foodText = document.getElementById("modelBodyFoodText");
+      foodText.textContent = this.boxAry[index].food; 
+      var waterText = document.getElementById("modelBodyWaterText");
+      waterText.textContent = this.boxAry[index].water; 
+      var eggText = document.getElementById("modelBodyEggText");
+      eggText.textContent = this.boxAry[index].egg; 
+      var tempText = document.getElementById("modelBodyTempText");
+      tempText.textContent = this.boxAry[index].temp; 
+      var noteText = document.getElementById("modelBodyNoteText"); 
+      noteText.textContent = this.boxAry[index].description;   
+      document.getElementById("boxModel").style.zIndex = "1";        
+      document.getElementById("boxModel").toggleAttribute("hidden");
+      document.getElementById("boxModel").addEventListener("webkitAnimationEnd", function handler(e){ 
+        document.getElementById("boxModel").classList.remove("modelSlideInClass");
+        e.currentTarget.removeEventListener(e.type, handler); 
+        
+      }, false
+      );
+      this.modelVisibility = true;
+      document.getElementById("boxModel").classList.add("modelSlideInClass");
+    }   
+  }
+  changeZ(){     
+    if(this.modelVisibility == true){       
+      document.getElementById("boxModel").addEventListener("webkitAnimationEnd", function handler(e){ 
+        document.getElementById("boxModel").classList.remove("modelSlideOutClass");
+        document.getElementById("boxModel").style.zIndex = "-1";  
+        document.getElementById("boxModel").toggleAttribute("hidden");
+        e.currentTarget.removeEventListener(e.type, handler); 
+        }, false
+      );
+      this.modelVisibility = false;
+      document.getElementById("boxModel").classList.add("modelSlideOutClass");
+    }    
+    
+    
   }
 }
 

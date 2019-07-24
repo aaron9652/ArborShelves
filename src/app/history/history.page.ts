@@ -83,12 +83,7 @@ export class HistoryPage implements OnInit
         this.boxAry.push(hstAry);  
          
       });
-      console.log(this.boxAry); 
-      // for(let k = 0; k < this.lsTst.length; k++){
-      //   this.boxClss.push(new boxCls());
-      // }
-      
-      
+      console.log(this.boxAry);        
     }); 
      
     // this.getBox(this.dbUrl).subscribe(data=>{
@@ -109,7 +104,6 @@ export class HistoryPage implements OnInit
   }
      
   async boxTest(name: any){
-
     if (document.getElementById(name).style.display == 'none'){ 
       document.getElementById(name).classList.replace("slide-in-reverse","slide-in-both-ways")
       document.getElementById(name).style.display = 'block';
@@ -121,7 +115,6 @@ export class HistoryPage implements OnInit
       myBox.style.display = 'none'; e.currentTarget.removeEventListener(e.type, handler); }, false);
       myBox.classList.replace("slide-in-both-ways","slide-in-reverse");
     }
-
   }
   callTest(num: any){
     console.log(num); 
