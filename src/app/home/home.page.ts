@@ -10,6 +10,7 @@ import { FirebaseAuth } from '@angular/fire';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { promise } from 'protractor';
+import { timeout } from 'q';
 
 
 
@@ -31,7 +32,7 @@ export class HomePage implements OnInit {
   public DOMSlides: any; 
   public slidesVisibility = false; 
   public modelVisibility = false; 
-  
+  public yCord; 
   public boxAry: any[]=[]; 
   public modelBox: any[]=[];
   public model = class {
@@ -61,6 +62,7 @@ export class HomePage implements OnInit {
           }
         }
       );
+      
   }
   disconnectSubscription = this.network.onDisconnect().subscribe(() => {
     alert("check network");
@@ -68,7 +70,9 @@ export class HomePage implements OnInit {
   ngOnInit() {
     document.getElementById("slidesLoadingDiv").style.visibility = "hidden"; 
     this.DOMSlides = document.getElementById("slides");
-    
+    setTimeout(function(){
+      document.getElementById("slides").style.display = "none";
+    }, 1000); 
     this.getBoxesForSlides(this.dbUrl).subscribe((boxes) =>{
       let jsonBoxes = JSON.parse(JSON.stringify(boxes)); 
       Object.values(jsonBoxes).map(box => {
@@ -78,11 +82,18 @@ export class HomePage implements OnInit {
           
       }); 
       //this.boxAry.push(this.modelBox); 
-    }); 
-    
-    console.log(this.boxAry);  
+    });  
+    document.getElementById("boxModel").addEventListener('touchmove', (event) => this.modelSwipeHandler(event), false);  
+    document.addEventListener('touchstart', function handler(e){
+      this.yCord = e.touches[0].clientY
+    }, false); 
   }
   
+  modelSwipeHandler(e: any){
+      if (this.yCord > (e.touches[0].clientY * 1.05)) {this.changeZ(); this.yCord  = ""}
+      
+      else this.yCord  = e.touches[0].clientY;
+  }
    chkAuth() {
     if (this.loggedIn == true) {
       this.qrHref = "/box";
@@ -123,22 +134,38 @@ export class HomePage implements OnInit {
     this.slides.slideNext();
   }
 
-  toggleSlides(){
-    if(this.slidesVisibility == true){
-      document.getElementById("slides").style.visibility = "hidden";
+  toggleSlides(ev){
+    console.log(document.getElementById("slides").click);
+    var a = document.getElementById("slides").getAttributeNames; 
+    console.log(a); 
+    document.getElementById("slides").click(); 
+    if(document.getElementById("slides").style.display == "none"){
+      document.getElementById("slides").addEventListener("(click)", function handler(e){
+        e.stopPropagation(); console.log("test"); 
+      });
       this.DOMSlides.addEventListener("webkitAnimationEnd", function handler(e){ 
-        document.getElementById("slides").classList.remove("ion-slidesOut");   
-        document.getElementById("slides").style.display = "none"; e.currentTarget.removeEventListener(e.type, handler); }, false);
-      document.getElementById("slides").classList.add("ion-slidesOut");            
+
+         e.currentTarget.removeEventListener(e.type, handler); document.getElementById("slides").removeEventListener("click", handler)});
+         document.getElementById("slidesButton").click = function(){console.log("changed")};
+         document.getElementById("slides").classList.replace("ion-slidesOut", "ion-slidesIn");
+         document.getElementById("slides").style.visibility = "visible";       
+         document.getElementById("slides").style.display = "block";
+      this.slidesVisibility = true; 
+
+    } 
+    else {      
+      this.DOMSlides.addEventListener("webkitAnimationEnd", function handler(e){           
+        document.getElementById("slides").style.display = "none"; 
+        e.currentTarget.removeEventListener(e.type, handler); 
+        document.getElementById("slides").style.visibility = "hidden";
+          }, false);
+        document.getElementById("slidesButton").click = function(){console.log("changed")}; 
+        document.getElementById("slides").classList.replace("ion-slidesIn", "ion-slidesOut");
       
         this.slidesVisibility = false; 
       return true;
-    } 
-    else{
-      document.getElementById("slides").style.display = "block"
-      this.DOMSlides.style.visibility = "visible"; 
-      this.slidesVisibility = true; 
     }
+
   }
   refresherToggleSlides(){
     if(this.slidesVisibility == true){
@@ -177,6 +204,8 @@ export class HomePage implements OnInit {
       var tempText = document.getElementById("modelBodyTempText");
       tempText.textContent = this.boxAry[index].temp; 
       var noteText = document.getElementById("modelBodyNoteText"); 
+      document.getElementById("modelBoxId").textContent = "Box #" + index; 
+      document.getElementById("modelBoxTime").textContent = this.boxAry[index].time; 
       noteText.textContent = this.boxAry[index].description;   
       document.getElementById("boxModel").style.zIndex = "1";        
       document.getElementById("boxModel").toggleAttribute("hidden");
