@@ -1,80 +1,347 @@
+.grid-container{
+  display: grid;   
+  grid-template-rows: repeat(3, 1fr);
+  width: 100vw;
+  height: 90vh;
+}
+
+.flexcontainer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 100vw; 
+}
+.div-class{
+  position: relative;
+  top: 0%;
+  left: 0%;
+  width: 99%;
+  height: 99%;
+  text-align: center;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonGrid{
+  display: grid; 
+  grid-template-rows: repeat(3, 1fr);
+}
+
 .bg-class{
-    --background: rgb(63, 83, 133); 
+    --background: #759EB8;
+    --overflow: hidden; 
 }
 
 .bgh-class{
-    background-color: rgb(58, 66, 113); 
-    --color: rgb(234, 203, 136);
-    font-family: 'Muli', sans-serif;
-    
+    background-color: #D8E1FF; 
+    --color: #011936;
+    font-family: 'Muli', sans-serif;    
 }
 
-.mainScButtons{
-    --background: rgb(58, 66, 113);
-    --color: rgb(234, 203, 136);
-    font-family: 'Muli', sans-serif; 
+.headDiv{
+  padding-top: 5%; 
 }
 
 .header-class{
-    height: 10vh;
+  height: 10vh;
 }
 
-.toolbar-class{
-    --padding-top: 0px !important;
-    --padding-start: 0px !important;
-    --padding-bottom: 0px !important;
-    --padding-end: 0px !important;
-}
-
-.grid-container{
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    width: 100vw;
-    height: 90vh;
-}
-
-.ti-class{
-    color: linear-gradient(270deg,rgb(227, 255, 214) 0%, rgb(214, 255, 206) 13.5%, rgb(214, 255, 212) 33.33%, rgb(210, 226, 255) 100%) !important;
-    font-family: 'Muli', sans-serif;
-}
-
-.div-class{
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 99%;
-    height: 99%;
-    text-align: center;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.userName{
-    color: rgb(234, 203, 136);
-    float: right; 
-    padding-right: 2%;
-    padding-top: 2%;    
-}
-.headDiv{
-    padding-top: 5%; 
-}
 .logIn-class{   
-    --background: rgb(63, 83, 133);
-    --color: rgb(234, 203, 136);  
-    float: left; 
-    padding-left: 2%;
-    font-family: 'Muli', sans-serif;
+  --background: #759EB8;
+  --color: white;  
+  font-family: 'Muli', sans-serif;
+  float: left;
+  position: relative;
+  height: 40%;
+  top: 25%;
+  left: 2%; 
 }
 
-.list-class{
-    border-bottom: 10px;
-    border-color: black;
-    --ion-background-color: transparent; 
-    backface-visibility: hidden;
-    font-family: 'Muli', sans-serif; 
-    font-size: 15px; 
-    --color: white; 
+.userName{
+  color: #7A8B99;
+  float: right; 
+  position: relative;
+  float: right;  
+  top: 35%;
+  right: 2%;   
 }
+
+.mainScButtons{
+  --background: #D8E1FF;
+  --color: #7A8B99;
+  font-family: 'Muli', sans-serif; 
+  width: 50vw; 
+}
+
+.modelHeaderText{
+  white-space: normal;
+  position: relative; 
+  font-size: 20px; 
+  font-family: 'Muli', sans-serif; 
+  font-weight: bold; 
+  color: black; 
+}
+.modelBodyDiv{
+  position: relative;
+  width: 100%;
+  text-align: center;
+  float: left;
+  display: flex;
+  align-items: center; 
+  height: 20%;  
+  border-top: 2px solid white;
+}
+.modelGrid{
+  display: grid; 
+  grid-template:auto/40% 60%;
+}
+.modelBodyText{ 
+  text-align: center !important; 
+  white-space: normal; 
+  float: right;
+  padding-left: 3%; 
+  font-size: 16px;
+  text-align: right;
+}
+.modelBodyLabel{ 
+  text-align: left !important; 
+  padding-left: 3%; 
+  font-size: 20px;
+}
+.model-div{  
+  box-shadow: 0 0 10vh 2vh rgba(0, 0, 0, 0.8);
+  z-index: -1;
+  width: 80vw;
+  height: 60vh;
+  border: solid 2px white; 
+  position: absolute;
+  left: 10%;
+  right: 10%;   
+  bottom: 18%; 
+  background-color: black;
+  border-radius: 4px; 
+}
+.modelSlideInClass{      
+  animation-name: modelSlideInAnimation;
+  animation-duration: 600ms;
+  animation-timing-function:
+  ease;
+  animation-iteration-count:
+  1; 
+}
+
+.modelSlideOutClass{        
+  animation-name: modelSlideOutAnimation;
+  animation-duration: 600ms;
+  animation-timing-function: ease;
+  animation-iteration-count:
+  1; 
+}
+
+@keyframes modelSlideInAnimation{
+  0%{
+    -webkit-transform: translate3d(0,140%,0);
+  }
+  50%{    
+    -webkit-transform: translate3d(0,-5%,0);
+  }
+  75%{
+    -webkit-transform: translate3d(0,3%,0);
+  }
+  100%{
+    -webkit-transform: translate3d(0,0,0);
+  }  
+
+}
+
+@keyframes modelSlideOutAnimation{
+  0%{
+    -webkit-transform: translate3d(0,0,0);
+  }
+  100%{
+    -webkit-transform: translate3d(0,140%,0);
+  }
+}
+
+.fabButton{
+  z-index: 0;
+  size: 100%; 
+  color: white; 
+  --background: #acc5ff;
+  font-family: 'Muli', sans-serif;
+}
+
+ .fabRefresh{
+    --background: #acc5ff;
+    --color: white;        
+  --border-color: white;
+  --border-width: 2px;
+  --border-style: solid;
+  left: 10%; 
+    
+ }
+ .refreshSpinner{
+     height: 4vh; 
+     width: 4vw;
+ }
+
+ ion-slides{
+  visibility: hidden;
+}
+
+.ion-slidesIn{
+  transition: all 500ms ease;
+  animation: slidesSlideInAnimation 500ms ease;
+}
+@keyframes slidesSlideInAnimation{
+  0%{
+    -webkit-transform: translate3d(0,140%,0);
+  }
+  50%{
+    -webkit-transform: translate3d(0,-5%,0);
+  }
+  70%{
+    -webkit-transform: translate3d(0,3%,0);
+  }
+  100%{
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+.ion-slidesOut{ 
+  transition: all 750ms ease;
+  animation: slidesSlideOutAnimation 500ms ease;
+}
+@keyframes slidesSlideOutAnimation{
+  0%{
+    -webkit-transform: translate3d(0,0,0);
+  }
+  100%{
+    -webkit-transform: translate3d(0,140%,0);
+  }
+}
+
+ion-card{
+  width: 40%; 
+  height: 90%;
+  border: 2px solid white; 
+  color: rgb(234, 203, 136);
+  font-family: 'Muli', sans-serif; 
+  font-weight: bold; 
+}
+.cardGrid{
+  border-width: 2px !important;
+  border-right-width: 2px !important; 
+  border-color: white !important; 
+  display: grid; 
+  grid-row: auto auto; 
+}
+.cardHeader{
+  background-color: #acc5ff;
+  text-align: left; 
+  display: grid; 
+  grid-row: 10% 25%; 
+
+}
+.cardHeaderText{
+  margin: 0px;
+  position: relative;
+  color: white; 
+  padding: 3%;
+}
+.cardBody{
+  background-color: #869cbb;
+  border: 0px solid white; 
+  border-top: 2px solid white; 
+}
+.cardBodyText{
+  padding: 5%; 
+  margin: 0px; 
+  color: white; 
+}
+
+.progress{
+  height: auto;
+}
+.progress span{  
+  transition: all 500ms ease;
+  background: rgb(58, 66, 113);
+  box-shadow: 1px 2px 3px rgb(33, 37, 65);
+  height: 10px;
+  width: 10px;  
+  display: none;
+  border-radius: 10px;
+}  
+.progress label{
+  opacity: 0;
+  font-family: 'Muli', sans-serif;
+  transition: all  ease;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 2px 3px rgb(33, 37, 65);
+  text-align: center; 
+  font-weight: bold; 
+  display: inline-block;   
+  animation-name: wave, opacityIn; 
+  animation-duration:
+  4000ms, 1000ms;
+  animation-timing-function: ease, ease-out;
+  animation-iteration-count: infinite, 1;
+}  
+
+  
+.progress label:nth-child(1){  animation-delay: 300ms; }
+.progress label:nth-child(2){  animation-delay: 200ms; }
+.progress label:nth-child(3){  animation-delay: 100ms; }
+.progress label:nth-child(4){  animation-delay: 0; }
+.progress label:nth-child(5){  animation-delay: 100ms; }
+.progress label:nth-child(6){  animation-delay: 200ms; }
+.progress label:nth-child(7){  animation-delay: 300ms; }
+
+.progress span:nth-child(9){  animation-delay: 200ms; }
+.progress span:nth-child(10){  animation-delay: 300ms; }
+.progress span:nth-child(11){  animation-delay: 400ms; }
+.progress span:nth-child(12){  animation-delay: 500ms; }
+.progress span:nth-child(13){  animation-delay: 600ms; }
+.progress span:nth-child(14){  animation-delay: 700ms; }
+.progress span:nth-child(15){  animation-delay: 800ms; }
+
+  @keyframes wave{
+    0%, 100%{
+      opacity: 1;          
+      transform-box: scale(1.0);      
+      color: white;
+      transform: translate(0,0);
+    }
+    50%{         
+      color: #eac7ff;
+      transform: translate(0,-15px);
+    }
+    70%{   
+      color: #eac7ff;
+    }
+  }
+  @keyframes opacityIn{
+    0%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+  @keyframes spanWave{
+    0%, 100%{
+      background-color:  #011936;;
+    }
+    40%{
+      background-color: rgb(225, 151, 248);
+    }
+  }
+
+  

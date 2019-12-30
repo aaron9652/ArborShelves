@@ -1,21 +1,21 @@
 .bgh-class{
-    background-color: rgb(58, 66, 113); 
-    --color: rgb(234, 203, 136);
-    font-family: 'Muli', sans-serif;
-    
+  --background: #D8E1FF;
+  background-color: #D8E1FF; 
+  --color: #7A8B99;
+  font-family: 'Muli', sans-serif;    
 }
 
 .bg-class{
-    --background: rgb(63, 83, 133); 
-    background-color: rgb(63, 83, 133);
-    --color: rgb(234, 203, 136);
-    color: rgb(234, 203, 136);
+    --background: #759EB8;
+    background-color: #759EB8;
+    --color: white;
+    color: white;
     font-family: 'Muli', sans-serif;
 }
 
 .his-class{
     --background: rgb(93, 119, 185); 
-    background-color: rgb(63, 83, 133);
+    background-color: #759EB8;
     --color: rgb(234, 203, 136);
     color: rgb(234, 203, 136);
     font-family: 'Muli', sans-serif;
@@ -23,26 +23,26 @@
 }
 
 .innerList-class{
-  --background: rgb(93, 119, 185); 
-  background-color: rgb(93, 119, 185); 
-  --color: rgb(234, 203, 136);
-    color: rgb(234, 203, 136);
-    --border-color:  rgb(63, 83, 133);
+  --background: #acc5ff; 
+  background-color: #acc5ff; 
+  --color: white;
+    color: white; 
+    --border-color:  rgb(102, 138, 160);
     font-family: 'Muli', sans-serif; 
 }
 .ininnerList-class{
-  --background: rgb(132, 163, 241); 
-  background-color: rgb(132, 163, 241); 
-  --color: rgb(234, 203, 136);
-    color: rgb(234, 203, 136); 
+  --background: #d8e1ff; 
+  background-color: #d8e1ff; 
+  --color: #011936;
+    color: #011936; 
     font-family: 'Muli', sans-serif;
 }
 
 .slideButton-class{
-  --background: rgb(234, 203, 136);
-  background-color: rgb(234, 203, 136); 
-  --color: rgb(63, 83, 133); 
-    color: rgb(63, 83, 133); 
+  --background: #D8E1FF;
+  background-color: #D8E1FF; 
+  --color: #759eb8; 
+    color: #759eb8; 
 }
 
 //https://codepen.io/swieder/pen/RNqVqY -> Code for animating in or out

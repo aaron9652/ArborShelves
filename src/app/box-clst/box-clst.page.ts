@@ -34,9 +34,7 @@ export class BoxCLstPage implements OnInit {
 
 
   constructor(public datePipe: DatePipe, public barcodeScanner: BarcodeScanner, public navCtrl: NavController, public http: HttpClient, public alertController: AlertController, public actionSheetController: ActionSheetController, public appC: AppComponent, public af: AngularFireAuth) {
-    let t = document.getElementById("")
     this.user = af.authState;
-  
     this.user.subscribe((user) =>{
       this.userDetails = user;
       this.id = this.userDetails.displayName.toString(); 

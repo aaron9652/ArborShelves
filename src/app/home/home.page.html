@@ -3,32 +3,102 @@
 </style>
 
 <ion-header class="bgh-class" style="height: 10vh" > 
-  <div class="headDiv">
+  <div style="height: 100%">
   <ion-button class="logIn-class" id="lInButton" size="small" href="/log-in"> log in</ion-button>
-  <ion-button  hidden class="logIn-class" id="lOutButton" size="small" (click)="logOut()" > log out</ion-button> </div>
+  <ion-button  hidden class="logIn-class" id="lOutButton" size="small" (click)="logOut()" >log out</ion-button> 
   <ion-label id="userName" class="userName"></ion-label>
+</div>
   </ion-header>
-
 <ion-content class="content-class bg-class">
   <div class="grid-container">
     <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div>
-      <ion-button href="{{ hsHref }}"  class="mainScButtons" id="hsLstButton" expand="block" size="large" fill ="outline" shape="round">Box History</ion-button>
-      <ion-button href="{{ qrHref }}"  class="mainScButtons" id="chkLstButton" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button>
+    <div class="buttonGrid">
+      <div class="flexcontainer">
+        <ion-button href="{{ hsHref }}"  class="mainScButtons" id="hsLstButton" expand="block" size="large" fill ="outline" shape="round">Box History</ion-button>
+      </div> 
+      <div class="flexcontainer">
+          <ion-button href="{{ qrHref }}"  class="mainScButtons" id="chkLstButton" expand="block" size="large" fill ="outline" shape="round">Box Checklist</ion-button>
+      </div>
+      <div class="flexcontainer">
+        <ion-fab class="fabButton flexcontainer" slot="fixed" start  style="float: left;">
+          <ion-fab-button id="slidesButton" class="fabButton" (click)="toggleSlides($event)">
+            <ion-label class="fabButton">To-Do</ion-label>
+          </ion-fab-button>
+          <ion-fab-list side="end" style="left: 10%">
+              <ion-fab-button class="fabRefresh" (click)="refreshBoxSlides($event); ">
+                <ion-icon id="refreshIcon" class="fabRefresh" name="refresh"></ion-icon>
+                <ion-spinner id="refreshSpinner" class="refreshSpinner" hidden></ion-spinner>
+              </ion-fab-button>
+          </ion-fab-list>
+        </ion-fab>
+      </div>    
     </div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    <div class="flexcontainer">
+      <div class="progress container" hidden id="slidesLoadingDiv">
+        <label>L</label>
+        <label>O</label>
+        <label>A</label>
+        <label>D</label>
+        <label>I</label>
+        <label>N</label>
+        <label>G</label>
+          <br/>
+      </div>
+    <ion-slides   slidesPerView="4" zoom="false" style="padding: 0; " ng-hide="slides" id="slides"  #slides pager="false" id="slides" class="ion-slidesOut">
+      <ion-slide *ngFor = "let boxes of boxAry; let i = index;">
+        <ion-card >
+          <div class="cardGrid">
+            <div class="cardHeader" style="grid-row: 1;">
+              <div style="grid-row: 1;">
+                <h1 class="cardHeaderText">Box #{{i}}</h1>
+              </div>
+              <div style="grid-row: 2;">
+                <h4 class="cardHeaderText">Status: </h4>
+              </div>              
+            </div>
+            <div class="cardBody" style="grid-row: 2;" (click)="viewSlideBoxInfo(i)" >
+              <ion-ripple-effect></ion-ripple-effect>
+              <h4 class="cardBodyText" >View Info</h4>
+            </div>            
+          </div>                    
+        </ion-card> 
+      </ion-slide>
+    </ion-slides>
+  </div>
+                    
+  </div>
+  <div hidden class="model-div" id="boxModel" style="white-space: nowrap">
+    <div style="background-color: #D8E1FF; height: 15%; display: grid; grid-template:auto/50% 50%; max-width: inherit;" >
+      <div style="grid-column: 1">
+        <label id="modelBoxId" class="modelHeaderText" style="float: left; padding-left: 3%;">Box #</label> <br/>
+        <label  class="modelHeaderText" style="float: left; padding-left: 3%;">Last Completed: </label>
+      </div>
+      <div style="grid-column: 2">        
+        <label id="modelBoxTime" class="modelHeaderText" style="float: right; padding-right: 3%; font-size: 2vh; left: 7%;"> </label>
+      </div>
+    </div>
+    <div style=" height: 85%; background-color: #c0cbe5;">
+      <div class="modelBodyDiv modelGrid">
+        <label class="modelBodyLabel">Food:</label>
+        <label class="modelBodyText" id="modelBodyFoodText" style="float: right; left: 0%; right: 3%;"></label>
+      </div>
+      <div class="modelBodyDiv modelGrid">
+        <label class="modelBodyLabel">Water:</label>
+        <label class="modelBodyText" id="modelBodyWaterText" style="float: right; left: 0%; right: 3%;"></label>
+      </div>
+      <div class="modelBodyDiv modelGrid">
+        <label class="modelBodyLabel">Egg:</label>
+        <label class="modelBodyText" id="modelBodyEggText" style="float: right; left: 0%; right: 3%;"></label>
+      </div>
+      <div class="modelBodyDiv modelGrid">
+        <label class="modelBodyLabel">Temperture:</label>
+        <label class="modelBodyText" id="modelBodyTempText" style="float: right; left: 0%; right: 3%;"></label>
+      </div>
+      <div class="modelBodyDiv modelGrid">
+        <label class="modelBodyLabel">Note:</label>
+        <label class="modelBodyText" id="modelBodyNoteText" style="float: right; left: 0%; right: 3%;"></label>
+      </div>
+    </div>
   </div>
 </ion-content>
 

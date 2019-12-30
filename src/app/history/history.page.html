@@ -1,3 +1,4 @@
+<!-- https://stackoverflow.com/questions/45993221/ionic-3-ion-list-horizontal-want-to-show-a-list-ion-list-horizontal -->
 <style>
     @import url('https://fonts.googleapis.com/css?family=Muli:200');
 </style>
@@ -11,6 +12,16 @@
 </ion-header>
 
 <ion-content class="bg-class " >
+    <!-- <ion-virtual-scroll [items]="items" approxItemHeight="320px">
+        <ion-card *virtualItem="let item; let itemBounds = bounds;">
+         
+        <ion-card-header>
+          <ion-card-title>{{ item[0] }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>{{ item[0] }}</ion-card-content>
+        </ion-card>
+      </ion-virtual-scroll> -->
+      
 
   <ion-list class="bg-class" >
     <div  class="bg-class"  *ngFor = "let boxes of boxd | keyvalue; let i = index">
@@ -42,23 +53,7 @@
       </ion-list>
     </div>
       
-    </ion-list>
-    
-
-<!-- <ion-list (click)="disTest()" id="listVis">
-     <ion-infinite-scroll  >
-        <ion-infinite-scroll-content
-          loadingSpinner="bubbles"
-          loadingText="Loading more data...">
-          <ion-item  *ngFor = "let la of test;"> {{la}} 
-      
-            </ion-item>
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-</ion-list>   -->
-    
-  
-
+    </ion-list>      
 </ion-content>
 <script >
   function a(){
